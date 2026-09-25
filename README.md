@@ -80,4 +80,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md), [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT
 
 ## License
 
-MIT (license file added with the first code commit after the theme reveal).
+MIT. See [LICENSE.md](./LICENSE.md). Third-party data and ported code keep their own terms (see Data Sources And Attribution above): Open-Meteo data is CC BY 4.0, NWS data is public domain, AirNow data is preliminary, and the planned Liljegren WBGT port is derived from ECMWF thermofeel under Apache-2.0.

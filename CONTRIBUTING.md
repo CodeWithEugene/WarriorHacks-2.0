@@ -160,4 +160,4 @@ Open a GitHub issue with steps to reproduce, expected versus actual behavior, de
 
 ## 9. License And Attribution
 
-By contributing you agree that your contributions are licensed under the repository's license (MIT, see `LICENSE` once added). Third-party data keeps its own terms (for example Open-Meteo's CC BY 4.0 attribution requirement), recorded in the README.
+By contributing you agree that your contributions are licensed under the repository's license (MIT, see [LICENSE.md](./LICENSE.md)). Third-party data keeps its own terms (for example Open-Meteo's CC BY 4.0 attribution requirement), recorded in the README.

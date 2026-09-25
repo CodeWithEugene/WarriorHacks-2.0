@@ -237,7 +237,7 @@ Versions are what `shadcn init` installs today (verified by generating a project
 ├── .github/workflows/ci.yml
 ├── components.json  drizzle.config.ts  next.config.ts  postcss.config.mjs  tsconfig.json
 ├── vitest.config.ts  playwright.config.ts  .env.example  .prettierrc  eslint.config.mjs
-├── README.md  CONTRIBUTING.md  CODE_OF_CONDUCT.md  SECURITY.md  CLAUDE.md  LICENSE
+├── README.md  CONTRIBUTING.md  CODE_OF_CONDUCT.md  SECURITY.md  CLAUDE.md  LICENSE.md
 └── package.json  pnpm-lock.yaml  pnpm-workspace.yaml
 ```
 
