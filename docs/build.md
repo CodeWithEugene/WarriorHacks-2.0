@@ -39,6 +39,29 @@
 
 ---
 
+## Build Log And Deviations (Updated Sep 28, 2026)
+
+What is built so far (all after the theme reveal):
+
+| Area | Status |
+|---|---|
+| `lib/heat` Liljegren WBGT port (thermofeel, Apache-2.0) + NOAA solar geometry | Done; matches thermofeel within 0.1 C on 288 live Texas cases |
+| `lib/rules` UIL 2026-27 and KSI rule sets, AQI presets, lightning hold, session limits, Texas class suggestion | Done; conformance suite in `tests/conformance` |
+| `lib/conditions` NWS gridpoint WBGT + Open-Meteo model + air quality, combined (higher source wins) | Done; parsers tested on recorded fixtures |
+| Home page (Stripe-inspired: live eyebrow, two-tone headline, heat ribbon, bento, dark stats band) | Done |
+| Quick Check (`/check`) with place search, UIL/KSI, class suggestion, requirements, timeline, chart, AQI, thunder, sources | Done |
+| Practice Mode (`/practice`) client-side demo: setup, pre-check, recheck countdown, breaks, time used, level-change confirmation, cooling checklist, thunder hold, live log, end and sign, CSV export, wake lock, session restore | Done |
+| Emergency protocol (`/emergency`) with cooling timer, 911 after cooling, temperature entries, incident timeline | Done |
+| English and Spanish catalogs, light, dark and sunlight themes | Done |
+| Database, auth, schools and teams, check-ins, Jev features, push, PDF | Next |
+
+Deviations from the spec above (intentional):
+- **Locale is cookie-based** (next-intl without `[locale]` URL segments). Simpler routing; `/` serves English or Spanish from the `NEXT_LOCALE` cookie or `Accept-Language`.
+- **Layout is near full width**: a `page-col` utility (in `app/globals.css`) makes every page column fill the viewport minus a small inset (up to 1920 px) and draws the dashed left and right guide lines, including the header and footer.
+- **Rate limiting** uses a small in-memory limiter (`lib/rate-limit.ts`) until Upstash Redis is provisioned.
+- **Practice Mode is currently client-only** (state in the browser, restored from localStorage) so it works offline and without accounts; it will sync to the server session model in section 13 once the database lands.
+- **ESLint:** `eslint-plugin-react` version detection is broken under ESLint 10, so the React version is pinned in `eslint.config.mjs`; generated shadcn files (`components/ui`, `hooks/use-mobile.ts`) are excluded from lint.
+
 ## 0. Scope And Definition Of Done
 
 ### 0.1 Scope tiers

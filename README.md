@@ -50,11 +50,12 @@ Requires Node 22+ and **pnpm** (the only package manager for this repo).
 
 ```bash
 pnpm install
-cp .env.example .env.local
-pnpm db:migrate
-pnpm db:seed
-pnpm dev
+pnpm dev          # http://localhost:3000
+pnpm test         # WBGT physics, UIL conformance, conditions and practice state tests
+pnpm lint && pnpm typecheck && pnpm build
 ```
+
+No API keys are needed for the current build: weather comes from the National Weather Service and Open-Meteo, which are keyless. Pages: `/` (home), `/check` (Quick Check), `/practice` (Practice Mode demo), `/emergency` (heat stroke protocol).
 
 Full bootstrapping commands are in [docs/build.md](./docs/build.md) section 4.
 
