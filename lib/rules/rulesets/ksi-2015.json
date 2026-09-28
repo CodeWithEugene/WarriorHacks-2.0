@@ -1,0 +1,184 @@
+{
+  "id": "ksi-2015",
+  "name": "KSI Regional WBGT Activity Guidelines (Grundstein et al. 2015)",
+  "version": "2015.1",
+  "effectiveFrom": "2015-01-01",
+  "effectiveTo": null,
+  "sources": [
+    {
+      "title": "Korey Stringer Institute: WBGT monitoring",
+      "url": "https://koreystringer.institute.uconn.edu/wet-bulb-globe-temperature-monitoring/",
+      "retrieved": "2026-09-25"
+    },
+    {
+      "title": "Grundstein et al. 2015, Applied Geography 56:55-60",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0143622814002513",
+      "retrieved": "2026-09-25"
+    }
+  ],
+  "regions": [
+    {
+      "id": "ksi1",
+      "label": "Category 1",
+      "bands": [
+        {
+          "level": "green",
+          "minF": null
+        },
+        {
+          "level": "yellow",
+          "minF": 76.2
+        },
+        {
+          "level": "orange",
+          "minF": 81.2
+        },
+        {
+          "level": "red",
+          "minF": 84.2
+        },
+        {
+          "level": "black",
+          "minF": 86.1
+        }
+      ]
+    },
+    {
+      "id": "ksi2",
+      "label": "Category 2",
+      "bands": [
+        {
+          "level": "green",
+          "minF": null
+        },
+        {
+          "level": "yellow",
+          "minF": 79.8
+        },
+        {
+          "level": "orange",
+          "minF": 84.7
+        },
+        {
+          "level": "red",
+          "minF": 87.7
+        },
+        {
+          "level": "black",
+          "minF": 89.7
+        }
+      ]
+    },
+    {
+      "id": "ksi3",
+      "label": "Category 3",
+      "bands": [
+        {
+          "level": "green",
+          "minF": null
+        },
+        {
+          "level": "yellow",
+          "minF": 82.3
+        },
+        {
+          "level": "orange",
+          "minF": 87.1
+        },
+        {
+          "level": "red",
+          "minF": 90.1
+        },
+        {
+          "level": "black",
+          "minF": 92.1
+        }
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "level": "green",
+      "maxPracticeMinutes": null,
+      "breaks": {
+        "kind": "count",
+        "perHour": 3,
+        "minMinutes": 3
+      },
+      "coolingZoneRequired": false,
+      "outdoorAllowed": true,
+      "football": {
+        "gear": "full",
+        "pantsIfReachedMidPractice": false,
+        "conditioningAllowed": true
+      },
+      "sourceQuote": "Normal Activities - Provide at least three separate rest breaks each hour with a minimum duration of 3 min each during the workout."
+    },
+    {
+      "level": "yellow",
+      "maxPracticeMinutes": null,
+      "breaks": {
+        "kind": "count",
+        "perHour": 3,
+        "minMinutes": 4
+      },
+      "coolingZoneRequired": true,
+      "outdoorAllowed": true,
+      "football": {
+        "gear": "full",
+        "pantsIfReachedMidPractice": false,
+        "conditioningAllowed": true
+      },
+      "discretionNote": "Use discretion for intense or prolonged exercise.",
+      "sourceQuote": "Use discretion for intense or prolonged exercise; Provide at least three separate rest breaks each hour with a minimum duration of 4 min each. MANDATORY ONSITE RAPID COOLING ZONE (INCLUDING TUB OR TARP)"
+    },
+    {
+      "level": "orange",
+      "maxPracticeMinutes": 120,
+      "breaks": {
+        "kind": "count",
+        "perHour": 4,
+        "minMinutes": 4
+      },
+      "coolingZoneRequired": true,
+      "outdoorAllowed": true,
+      "football": {
+        "gear": "helmet_shoulder_pads_shorts",
+        "pantsIfReachedMidPractice": true,
+        "conditioningAllowed": true
+      },
+      "sourceQuote": "Maximum practice time is 2 hours; For Football: players are restricted to helmet, shoulder pads, and shorts during practice. If the WBGT rises to this level during practice, players may continue to work out wearing football pants without changing to shorts. For All Sports: Provide at least four separate rest breaks each hour with a minimum duration of 4 min each. MANDATORY ONSITE RAPID COOLING ZONE (INCLUDING TUB OR TARP)"
+    },
+    {
+      "level": "red",
+      "maxPracticeMinutes": 60,
+      "breaks": {
+        "kind": "total",
+        "minutesPerHour": 20
+      },
+      "coolingZoneRequired": true,
+      "outdoorAllowed": true,
+      "football": {
+        "gear": "none",
+        "pantsIfReachedMidPractice": false,
+        "conditioningAllowed": false
+      },
+      "sourceQuote": "Maximum practice time is 1 hour; For Football: No protective equipment may be worn during practice, and there may be no conditioning activities. For All Sports: There must be 20 min of rest breaks distributed throughout the hour of practice. MANDATORY ONSITE RAPID COOLING ZONE (INCLUDING TUB OR TARP)"
+    },
+    {
+      "level": "black",
+      "maxPracticeMinutes": 0,
+      "breaks": {
+        "kind": "none"
+      },
+      "coolingZoneRequired": true,
+      "outdoorAllowed": false,
+      "sourceQuote": "No outdoor workouts. Delay practices until a cooler WBGT is reached."
+    }
+  ],
+  "timing": {
+    "precheckWithinMinutes": 15,
+    "recheckEveryMinutes": 30,
+    "graceMinutes": 2
+  }
+}
