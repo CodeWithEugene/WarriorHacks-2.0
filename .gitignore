@@ -48,3 +48,10 @@ Thumbs.db
 *.pem
 .pnp
 .pnp.*
+.vercel
+.env*
+
+# Agent skill tooling installed by integrations
+.agents/
+.claude/skills/
+skills-lock.json

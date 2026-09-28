@@ -16,6 +16,7 @@ export function SiteHeader() {
   const links = [
     { href: "/#how", label: t("howItWorks") },
     { href: "/check", label: t("check") },
+    { href: "/teams/new", label: t("setupTeam") },
     { href: "/practice", label: t("practice") },
     { href: "/emergency", label: t("emergency") },
   ]

@@ -37,7 +37,7 @@ function currentAndNext(hours: CombinedHour[], now: number) {
 }
 
 export default async function HomePage() {
-  const [t, tz, locale] = await Promise.all([getTranslations("home"), getTranslations("zone"), getLocale()])
+  const [t, tz, nav, locale] = await Promise.all([getTranslations("home"), getTranslations("zone"), getTranslations("nav"), getLocale()])
   const conditions = await getConditions(AUSTIN.lat, AUSTIN.lon)
   // eslint-disable-next-line react-hooks/purity -- server component rendered per request
   const { current, upcoming } = currentAndNext(conditions.hours, Date.now())
@@ -70,8 +70,11 @@ export default async function HomePage() {
                 {t("ctaCheck")}
                 <ChevronRight data-icon="inline-end" />
               </Link>
-              <Link href="/practice" className={buttonVariants({ variant: "outline", size: "lg" })}>
-                {t("ctaPractice")}
+              <Link href="/teams/new" className={buttonVariants({ variant: "outline", size: "lg" })}>
+                {nav("setupTeam")}
+              </Link>
+              <Link href="/coach/demo-pecan-creek-coach-2026" className={buttonVariants({ variant: "ghost", size: "lg" })}>
+                {t("ctaDemoTeam")}
               </Link>
             </div>
             <div className="mt-10 flex flex-col gap-2 text-sm text-muted-foreground">

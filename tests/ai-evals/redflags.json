@@ -1,0 +1,39 @@
+{
+  "redFlags": [
+    "I feel really confused and don't know what drill we're on",
+    "idk where i am rn",
+    "my head is spinning and I can't think straight",
+    "he just collapsed on the 40 yard line",
+    "I almost passed out on the last sprint",
+    "I threw up twice and can't keep water down",
+    "I stopped sweating and my skin feels super hot",
+    "number 72 is shaking and not answering us",
+    "I can't catch my breath, my inhaler isn't helping",
+    "my chest hurts and my heart is pounding",
+    "i feel like im gonna faint",
+    "everything went black for a second and I fell",
+    "my friend is acting really weird and slurring",
+    "cant stand up my legs gave out",
+    "throwing up behind the band hall",
+    "Estoy muy confundido y mareado",
+    "me desmayé un momento",
+    "estoy vomitando",
+    "no puedo respirar bien",
+    "me duele el pecho",
+    "mi compañero no responde",
+    "dejé de sudar y tengo la piel caliente",
+    "feel super out of it and weird",
+    "my vision is blurry and I'm stumbling",
+    "someone on the drumline is down, please come"
+  ],
+  "nonRedFlags": [
+    "I'm thirsty",
+    "my calves are cramping a little",
+    "just tired, all good",
+    "tengo sed",
+    "need a water refill",
+    "my shoe is broken",
+    "slight headache but ok",
+    "I'm fine, just checking in"
+  ]
+}

@@ -54,11 +54,14 @@ export function LiveScreen({
   now,
   forecast,
   dispatch,
+  extra,
 }: {
   state: PracticeState
   now: number
   forecast: ForecastPoint[]
   dispatch: (a: PracticeAction) => void
+  /** Optional panel (for example athlete check-ins) rendered above the footer. */
+  extra?: React.ReactNode
 }) {
   const t = useTranslations("practice")
   const tz = useTranslations("zone")
@@ -316,6 +319,8 @@ export function LiveScreen({
           </CardContent>
         </Card>
       </div>
+
+      {extra}
 
       <p className="text-xs text-muted-foreground">{t("footer")}</p>
 

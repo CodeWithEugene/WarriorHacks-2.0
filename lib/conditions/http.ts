@@ -1,5 +1,5 @@
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://flagline.xyz"
-const CONTACT = process.env.APP_CONTACT_EMAIL ?? "contact@flagline.xyz"
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://flagline.vercel.app"
+const CONTACT = process.env.APP_CONTACT ?? "https://github.com/CodeWithEugene/WarriorHacks-2.0"
 
 /** NWS requires an identifying User-Agent with a contact. */
 export const USER_AGENT = `Flagline (${APP_URL}, ${CONTACT})`
