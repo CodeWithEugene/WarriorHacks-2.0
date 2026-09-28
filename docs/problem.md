@@ -402,3 +402,21 @@ The solution architecture ([solution.md](./solution.md) section 8, [build.md](./
 - Devpost saturation counts are loose keyword matches, not exact duplicates; we use them as relative signals.
 - Jev scores are model judgments over short descriptions. We use them as an independent sanity check, not as ground truth. Both methods agree on the top two and the bottom.
 - The full domain dossier (UIL chart values by class, UNC tool details, WBGT computation, AQI guidance, competitors, Austin climate) is summarized in [solution.md](./solution.md) and sourced in [research.md](./research.md).
+
+### 7.4 Outcome (Sep 28, 2026)
+
+The theme is **"Create a project that solves an issue in your community, county, state, or nation."**
+
+Jev theme-fit results (`jev-1.13.0`, script in [research.md](./research.md) section 4.4):
+
+| Candidate | Fit (0 to 4) | Confidence | On-theme without explanation (p) |
+|---|---|---|---|
+| **Flagline heat safety** | **3.77** | 0.81 | **0.91** |
+| Benefits navigator | 3.75 | 0.79 | 0.90 |
+| First-job rights | 3.59 | 0.66 | 0.88 |
+| Aid offer decoder | 3.43 | 0.53 | 0.88 |
+| Civic decoder | 3.43 | 0.60 | 0.89 |
+
+Decision: **build Flagline** (rule: fit at least 3.0 or Noul at least 0.6; both met, and Flagline is the top candidate). Theme bridge used everywhere (tagline, first 10 seconds of the video, README, landing page):
+
+> "Texas made heat safety mandatory for every outdoor practice this season. Flagline helps every school in our community, county and state follow it, free, so no student athlete dies of a preventable heat stroke."

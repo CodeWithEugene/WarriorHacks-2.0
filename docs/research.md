@@ -268,7 +268,7 @@ Interpretation is in [problem.md](./problem.md) section 5.2.
 import json, os, urllib.request
 
 KEY = os.environ["TYPESAFE_API_KEY"]
-THEME = "<paste the exact WarriorHacks 2.0 theme text here>"
+THEME = "Create a project that solves an issue in your community, county, state, or nation."
 CANDIDATES = {
   "flagline_heat_safety": "Free web app that runs heat (WBGT) and wildfire-smoke safety for school outdoor athletics and marching band: plans safe practice windows, runs 30-minute rechecks, routes athlete symptom check-ins to trainers, guides the heat stroke emergency protocol and keeps the compliance log required by Texas UIL since Aug 2026.",
   "aid_offer_decoder": "Web app that decodes college financial aid offer letters for first-generation students: labels every line as grant, loan type or work-study, finds missing costs, computes true net price and 4-year debt, and compares offers side by side.",
@@ -287,6 +287,8 @@ for key, text in CANDIDATES.items():
     a = json.load(urllib.request.urlopen(req, timeout=60))["answers"]
     print(f"{key:24s} fit={a['fit']['score']:.2f} (conf {a['fit']['confidence']:.2f})  obvious={a['obvious']['noul']:.2f}")
 ```
+
+Result on Sep 28, 2026 (`jev-1.13.0`): flagline_heat_safety fit 3.77 (conf 0.81), obvious 0.91; benefits_navigator 3.75 / 0.90; teen_work_rights 3.59 / 0.88; aid_offer_decoder 3.43 / 0.88; civic_decoder 3.43 / 0.89. Decision: build Flagline.
 
 Decision rule (from [problem.md](./problem.md) section 7.2): build Flagline if its fit is at least 3 (on the 0 to 4 index) or `obvious` is at least 0.6; if fit is about 2, build Flagline with a bridge sentence; otherwise pivot to the best-fitting backup.
 

@@ -18,19 +18,29 @@
 | Contact | wwhscomputerscience@gmail.com [V] |
 | Format | Online, public, free to enter ("$0 to enter") [V] |
 | Tagline | "Open to all skill levels! Build an app, website, game, or pitch an idea that fits the theme revealed two weeks before. We already have around $23K in sponsor prizes!" [V] |
-| Submission window | **Sep 28, 2026 12:00am CDT to Oct 12, 2026 11:45pm CDT** [V] |
+| Submission window | **Sep 28, 2026 12:00am CDT to Oct 12, 2026 11:45pm CDT** on the Devpost schedule [V]. On Sep 27 the organizers announced a **1-day extension** because of Devpost technical issues (so likely Oct 13, 11:45pm CDT); the Devpost schedule page still showed Oct 12 on Sep 28. **We keep Oct 12 as our deadline** and treat the extra day as buffer. [V, organizer email and Devpost update] |
 | Judging | Oct 12 11:45pm CDT to **Oct 15 5:00pm CDT** [V] |
 | Winners announced | **Oct 15, 2026 9:00pm CDT** [V] |
-| Theme | **Not yet public.** Revealed Sep 27, 2026, "the day before the hackathon submission phase begins" [V] |
+| Theme | **"Create a project that solves an issue in your community, county, state, or nation."** Announced Sep 27, 2026 by Devpost email and a Devpost update ("WarriorHacks 2.0 Theme & 1-Day Extension") [V] |
 | Tracks | **Hackathon** (code required) and **Ideathon** (no code required) [V] |
 | Judging criteria | Impact, Feasibility, User Experience, Technical Craft (25% each per the organizer template) [V] |
 | Prize pool (as displayed) | "$23,857 in cash" [V]. In reality it is the dollar value of **in-kind sponsor perks**, not cash [I, strong: every line item is a perk and the totals match exactly] |
 | Devpost theme tags | Beginner Friendly, Machine Learning/AI, Open Ended [V] |
-| Registered participants | 461 on the morning of Sep 25, 466 later the same day [V] |
+| Registered participants | 461 on the morning of Sep 25, 466 later the same day, **554 on Sep 28** [V] |
 | Judges | Prayash Gyawali, Nischal Kotamraju, Aditya Bhadra, Aarav Karumanchi, Leif Ramirez, Lucas Janssen, Arun Arunachalam (no titles listed) [V] |
 | Sponsors | CodeCrafters, InterviewBuddy, Art of Problem Solving, CleanShot X, DevSwarm, .xyz, Balsamiq [V] |
 | Previous edition | WarriorHacks (1.0), Sep 26 to 28, 2025, https://warriorhacks.devpost.com/ , theme "Build a tool that breaks down barriers to learning, making education more inclusive, accessible, and impactful." [V] |
 | Our track | **Hackathon track** (see [problem.md](./problem.md) and [solution.md](./solution.md)) |
+
+---
+
+## 0.1 The Theme (Announced Sep 27, 2026)
+
+> **"Create a project that solves an issue in your community, county, state, or nation."**
+
+Source: the Devpost update "WarriorHacks 2.0 Theme & 1-Day Extension" (also emailed to registrants): "We apologize for the delay in posting the hackathon theme as we were facing some technical issues on our Devpost page ... Because of these technical difficulties, we will be extending the submission window by 1 day so all participants do not lose any time making their projects." [V]
+
+How Flagline answers it: Texas (the **state**) made WBGT heat monitoring mandatory for every outdoor practice and marching band rehearsal from Aug 1, 2026; the schools, teams and families that must follow it are our **community** (Austin, Travis **County**); at least 17 other states require WBGT-guided practices, and exertional heat stroke is the leading preventable cause of death in high school football across the **nation**. Theme-fit check with Jev on Sep 28: Flagline fit 3.77 of 4 (confidence 0.81), "on-theme without explanation" 0.91, the highest of all five candidates ([problem.md](./problem.md) section 7.4).
 
 ---
 

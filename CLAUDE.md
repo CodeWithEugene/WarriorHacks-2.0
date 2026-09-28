@@ -15,7 +15,7 @@ Read before doing anything:
 
 ## Hard Rules
 
-1. **No application code before the theme reveal (Sep 27, 2026).** Until then only `docs/` and root markdown may change. After the reveal, follow [docs/problem.md](./docs/problem.md) section 7 before scaffolding.
+1. **Theme (revealed Sep 27, 2026):** "Create a project that solves an issue in your community, county, state, or nation." Flagline was confirmed ([docs/problem.md](./docs/problem.md) section 7.4). Build window: Sep 28 to Oct 12, 2026 11:45pm CDT (plus a 1-day extension announced by organizers; we still target Oct 12).
 2. **pnpm only.** Never npm or yarn. Commit `pnpm-lock.yaml`.
 3. **Pure shadcn/ui.** Only components and blocks from the default `@shadcn` registry (`pnpm dlx shadcn@latest add ...`), semantic tokens and our documented zone tokens. No other UI libraries or community registries. Do not casually edit `components/ui/*`; compose in `components/*`.
 4. **Base UI APIs** (the project uses `base-nova`): `render={<Button />}` on triggers, not `asChild`; `Select` needs `items`; links styled as buttons use `buttonVariants()` on `next/link`; toasts use `toast` from `@/components/ui/toast`. Run `pnpm dlx shadcn@latest docs <component>` when unsure.

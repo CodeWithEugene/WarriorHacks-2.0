@@ -4,7 +4,9 @@
 >
 > This document describes the complete solution end to end: who it is for, what it does, how it works, why each decision was made, when it is used, how it stays safe, how it survives after the hackathon and how we will present it. The build specification (stack, pages, components, APIs, data model, tests, schedule) is in [build.md](./build.md). The problem and the evidence are in [problem.md](./problem.md). The challenge is in [info.md](./info.md).
 >
-> Status: planning (Sep 25, 2026). No product code is written before the WarriorHacks 2.0 theme reveal on Sep 27. If the theme requires a pivot, [problem.md](./problem.md) section 7 applies.
+> Status: **building** (from Sep 28, 2026). Theme: "Create a project that solves an issue in your community, county, state, or nation." Flagline was confirmed by the theme-fit protocol ([problem.md](./problem.md) section 7.4).
+>
+> **Theme bridge:** "Texas made heat safety mandatory for every outdoor practice this season. Flagline helps every school in our community, county and state follow it, free, so no student athlete dies of a preventable heat stroke."
 
 ---
 
@@ -758,6 +760,7 @@ One sentence for each likely theme family (used in the tagline, the first 10 sec
 
 | Theme family | Bridge sentence |
 |---|---|
+| **Actual theme: an issue in your community, county, state or nation** | "Texas made heat safety mandatory for every outdoor practice this season. Flagline helps every school in our community, county and state follow it, free, so no student athlete dies of a preventable heat stroke." |
 | Health, wellness, safety | "Flagline prevents the most preventable death in high school sports by turning heat rules into a practice plan every coach can follow." |
 | Climate, sustainability, resilience | "As hotter seasons and smoke days become normal, Flagline helps school sports adapt safely instead of cancelling." |
 | Community, social good, tech for humanity | "Flagline gives every school, not just the ones that can afford sensors and trainers, the same heat safety routine." |

@@ -4,7 +4,11 @@
 
 Built for **[WarriorHacks 2.0](https://warriorhacks-2-0.devpost.com/)** (Westwood Computer Science Club, Austin, Texas; online, Sep 28 to Oct 12, 2026), Hackathon track.
 
-> **Status: planning.** The WarriorHacks 2.0 theme is revealed on **Sep 27, 2026** and projects must be built during the event, so this repository currently contains **planning documents only**. Application code starts after the theme reveal. See [docs/problem.md](./docs/problem.md) section 7 for the theme-fit protocol.
+> **Theme:** "Create a project that solves an issue in your community, county, state, or nation."
+>
+> Texas made heat safety mandatory for every outdoor practice this season. Flagline helps every school in our community, county and state follow it, free, so no student athlete dies of a preventable heat stroke.
+>
+> **Status: building** (started Sep 28, 2026, after the theme reveal). Planning documents were written before the reveal; all application code was written during the event.
 
 ---
 
@@ -40,7 +44,7 @@ Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · **shadcn
 
 Data: National Weather Service gridpoint WBGT (no key), Open-Meteo forecast and air quality (no key), AirNow (free key, optional), US Census geocoder.
 
-## Getting Started (After The Theme Reveal)
+## Getting Started
 
 Requires Node 22+ and **pnpm** (the only package manager for this repo).
 

@@ -573,6 +573,26 @@ shadcn typography recipes (docs), plus:
 
 Blocks: `sidebar-07` (collapsible-to-icons app shell), `login-03` (sign-in with Field), `dashboard-01` patterns (section cards, interactive area chart) adapted for the Today page.
 
+### 5.10 Visual direction: Stripe-inspired, shadcn-only
+
+Studied stripe.com on Sep 28, 2026 (desktop 1440 px). We borrow **layout and typographic patterns**, not assets, fonts, colors or code. Everything is still built from shadcn components and our tokens.
+
+| Stripe pattern (observed) | Flagline translation (shadcn + tokens) |
+|---|---|
+| Live counter eyebrow above the hero ("Global GDP running on Stripe: 1.72...%") | Live eyebrow: "Right now in Austin: 87.2° WBGT, Orange" rendered server-side from real forecasts with a pulsing dot (`size-2 rounded-full bg-zone-*`) |
+| Two-tone hero headline: a dark statement then a muted continuation, light weight (300), 48 px, tight tracking (-0.96 px), 1.15 line height | `h1` with `<span className="text-foreground">` + `<span className="text-muted-foreground">`, `font-light tracking-tight text-5xl/[1.1] md:text-6xl`, Geist |
+| Primary CTA with a chevron plus a secondary outline CTA side by side | `Button size="lg"` "Check Conditions Now" + `ChevronRight data-icon="inline-end"`; `buttonVariants({ variant: "outline", size: "lg" })` "Try The Demo School" |
+| Vertical hairline guide lines framing the content column, horizontal rules between sections | Container `max-w-6xl border-x border-dashed border-border`; sections separated by `Separator` or `border-t` |
+| Colorful gradient wave as hero art | **Heat ribbon**: an abstract diagonal band using the five zone tokens in order (`bg-linear-to-r from-zone-green via-zone-orange to-zone-red`), blurred and masked, decorative only (`aria-hidden`) |
+| Logo strip under the hero | "Built on official sources" strip: text badges for UIL, NFHS, NWS, Open-Meteo, AirNow (text, not logos) |
+| Bento grid of product cards, each showing real UI inside | `Card` grid (`grid md:grid-cols-6`, spans 4/2/3/3) each containing a live mini-UI: ZoneBadge timeline, recheck countdown, check-in alert, PDF log preview |
+| Dark statistics band ("135+", "$1.9T", "99.999%") | A `dark`-scoped section (`className="dark bg-background text-foreground"`) with 4 stats: "9,237 heat illnesses a year", "30 minutes between rechecks", "2 forecast sources", "$0 for schools" |
+| Section headings "Bold statement. Muted continuation." | Same two-tone treatment for every `h2` on marketing pages |
+| Cards with generous padding, 1 px borders, soft shadow on hover | `Card` defaults (ring), `hover:ring-foreground/20 transition` only |
+
+Rules: marketing pages only get the ribbon and bento; the app itself stays calm and dense (sidebar shell, cards, tables). Color still only means risk.
+
+
 ---
 
 ## 6. Information Architecture And Routes
