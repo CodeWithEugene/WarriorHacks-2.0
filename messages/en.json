@@ -121,7 +121,7 @@
     "locationDenied": "Location permission was denied. Search for a place instead.",
     "rules": "Rules",
     "rulesUil": "Texas UIL",
-    "rulesKsi": "Other State (KSI)",
+    "rulesKsi": "Outside Texas (KSI)",
     "region": "Region",
     "class3": "Class 3",
     "class2": "Class 2",
@@ -157,7 +157,12 @@
     "error": "We could not load the forecast. Try again in a moment.",
     "retry": "Try Again",
     "disclaimer": "Planning estimate from National Weather Service and Open-Meteo forecasts. Not a measurement. Take a reading where athletes practice.",
-    "startPractice": "Start Practice Here"
+    "startPractice": "Start Practice Here",
+    "myLocation": "My Location",
+    "accuracy": "Your device placed you within about {meters} m.",
+    "accuracyRough": "Your device only placed you within about {km} km, so this may be the wrong spot. Search for your school or town for a better match.",
+    "locationUnavailable": "We could not get a location fix. Search for a place instead.",
+    "nwsUsOnly": "The National Weather Service covers the US only. Outside the US this forecast uses the Flagline model alone."
   },
   "req": {
     "maxTime": "Max practice time",
@@ -293,7 +298,13 @@
     "readingLevel": "This reading is {level} under {region}.",
     "decimalHint": "Tap the value or use the buttons to adjust.",
     "stepDown": "Lower by 0.1",
-    "stepUp": "Raise by 0.1"
+    "stepUp": "Raise by 0.1",
+    "photoReading": "Reading The Meter",
+    "photoDetected": "Detected {value}° WBGT. Check it matches the meter, then save.",
+    "photoManual": "We could not read the meter clearly. Enter the value by hand.",
+    "photoFar": "This is more than 8° from the forecast. Double-check the meter.",
+    "photoNotConfigured": "Photo reading is not set up on this server. Enter the value by hand.",
+    "photoPrivacy": "The photo is read once and not stored."
   },
   "emergency": {
     "title": "Exertional Heat Stroke Protocol",

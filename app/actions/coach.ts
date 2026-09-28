@@ -23,8 +23,8 @@ const NewTeamInput = z.object({
   sport: z.enum(SPORTS),
   regionId: z.enum(["class2", "class3"]),
   placeName: z.string().trim().min(2).max(120),
-  lat: z.number().min(18).max(72),
-  lon: z.number().min(-180).max(-60),
+  lat: z.number().min(-90).max(90),
+  lon: z.number().min(-180).max(180),
   timeZone: z.string().min(3).max(64),
 })
 

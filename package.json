@@ -20,7 +20,8 @@
     "eval:triage": "tsx --tsconfig tsconfig.json scripts/evals/triage-eval.ts",
     "eval:ask": "tsx --tsconfig tsconfig.json scripts/evals/ask-eval.ts",
     "db:seed": "tsx --tsconfig tsconfig.json scripts/db/seed-demo.ts",
-    "db:clear-test": "tsx --tsconfig tsconfig.json scripts/db/clear-test-data.ts"
+    "db:clear-test": "tsx --tsconfig tsconfig.json scripts/db/clear-test-data.ts",
+    "eval:meter": "tsx --tsconfig tsconfig.json scripts/evals/meter-eval.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",

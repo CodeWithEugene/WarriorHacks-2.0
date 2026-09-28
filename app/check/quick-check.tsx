@@ -43,6 +43,8 @@ type ConditionsResponse = {
 
 const AUSTIN: Place = { id: "austin", name: "Austin", region: "Travis County, Texas", lat: 30.2672, lon: -97.7431, timeZone: "America/Chicago" }
 const HOUR = 3_600_000
+/** Browser fixes looser than this are usually Wi-Fi or IP based, not GPS. */
+const ROUGH_FIX_M = 1000
 const ACTIVITIES: { value: Sport; key: "football" | "band" | "otherSport" | "pe" }[] = [
   { value: "football", key: "football" },
   { value: "marching_band", key: "band" },
@@ -70,7 +72,9 @@ export function QuickCheck() {
   const [search, setSearch] = useState<{ q: string; items: Place[] } | null>(null)
   const [locating, setLocating] = useState(false)
   const [locError, setLocError] = useState<string | null>(null)
-  const [ruleSetId, setRuleSetId] = useState<RuleSetId>("uil-2026-27")
+  /** null means "choose rules from the location" (UIL inside Texas, KSI elsewhere). */
+  const [ruleSetId, setRuleSetId] = useState<RuleSetId | null>(null)
+  const [accuracyM, setAccuracyM] = useState<number | null>(null)
   /** null means "use the class suggested for this location". */
   const [regionId, setRegionId] = useState<string | null>(null)
   const [sport, setSport] = useState<Sport>("football")
@@ -98,10 +102,11 @@ export function QuickCheck() {
   const results = debounced.length >= 2 && search?.q === debounced ? search.items : null
 
   // Conditions (loading and error are derived from the request key).
-  const requestKey = `${place.lat},${place.lon},${ruleSetId},${regionId ?? "auto"},${nonce}`
+  const requestKey = `${place.lat},${place.lon},${ruleSetId ?? "auto"},${regionId ?? "auto"},${nonce}`
   useEffect(() => {
     const ctrl = new AbortController()
-    const params = new URLSearchParams({ lat: String(place.lat), lon: String(place.lon), ruleSetId })
+    const params = new URLSearchParams({ lat: String(place.lat), lon: String(place.lon) })
+    if (ruleSetId) params.set("ruleSetId", ruleSetId)
     if (regionId) params.set("regionId", regionId)
     fetch(`/api/conditions?${params}`, { signal: ctrl.signal })
       .then((r) => r.json() as Promise<ApiEnvelope<ConditionsResponse>>)
@@ -116,10 +121,25 @@ export function QuickCheck() {
   const data = result?.data ?? null
   const load = () => setNonce((n) => n + 1)
 
-  function choosePlace(p: Place) {
+  function choosePlace(p: Place, accuracy: number | null = null) {
     setPlace(p)
     setQuery("")
+    setRuleSetId(null)
     setRegionId(null)
+    setAccuracyM(accuracy)
+  }
+
+  /** Replace the coordinate label with a real place name once the lookup returns. */
+  async function nameLocation(lat: number, lon: number) {
+    try {
+      const r = await fetch(`/api/reverse-geocode?lat=${lat}&lon=${lon}&lang=${locale}`)
+      const j = (await r.json()) as ApiEnvelope<{ name: string; region: string } | null>
+      if (!j.ok || !j.data) return
+      const named = j.data
+      setPlace((cur) => (cur.id === "me" && cur.lat === lat && cur.lon === lon ? { ...cur, name: named.name, region: named.region } : cur))
+    } catch {
+      // Keep the coordinate label; the forecast does not depend on the name.
+    }
   }
 
   function useMyLocation() {
@@ -129,20 +149,26 @@ export function QuickCheck() {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setLocating(false)
-        choosePlace({
-          id: "me",
-          name: t("useLocation"),
-          region: `${pos.coords.latitude.toFixed(3)}, ${pos.coords.longitude.toFixed(3)}`,
-          lat: pos.coords.latitude,
-          lon: pos.coords.longitude,
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        })
+        const lat = Math.round(pos.coords.latitude * 1e4) / 1e4
+        const lon = Math.round(pos.coords.longitude * 1e4) / 1e4
+        choosePlace(
+          {
+            id: "me",
+            name: t("myLocation"),
+            region: `${lat.toFixed(4)}, ${lon.toFixed(4)}`,
+            lat,
+            lon,
+            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          },
+          pos.coords.accuracy,
+        )
+        void nameLocation(lat, lon)
       },
-      () => {
+      (err) => {
         setLocating(false)
-        setLocError(t("locationDenied"))
+        setLocError(err.code === err.PERMISSION_DENIED ? t("locationDenied") : t("locationUnavailable"))
       },
-      { enableHighAccuracy: true, timeout: 10_000 },
+      { enableHighAccuracy: true, timeout: 15_000, maximumAge: 0 },
     )
   }
 
@@ -157,7 +183,7 @@ export function QuickCheck() {
     return { current, next24, change, chartHours }
   }, [data, now])
 
-  const regionRef = data ? data.region : { ruleSetId, regionId: regionId ?? "class3" }
+  const regionRef = data ? data.region : { ruleSetId: ruleSetId ?? "uil-2026-27", regionId: regionId ?? "class3" }
   const rs = getRuleSet(regionRef.ruleSetId)
   const region = rs.regions.find((r) => r.id === regionRef.regionId) ?? rs.regions[0]!
   const current = view?.current ?? null
@@ -210,13 +236,21 @@ export function QuickCheck() {
                 <span className="font-medium">{place.name}</span>
                 <span className="truncate text-muted-foreground">{place.region}</span>
               </p>
+              {accuracyM !== null && (
+                <p className={cn("text-xs", accuracyM > ROUGH_FIX_M ? "text-destructive" : "text-muted-foreground")}>
+                  {accuracyM > ROUGH_FIX_M
+                    ? t("accuracyRough", { km: (accuracyM / 1000).toFixed(accuracyM >= 10_000 ? 0 : 1) })
+                    : t("accuracy", { meters: Math.round(accuracyM) })}
+                </p>
+              )}
+              {data && !data.sources.nws.ok && <p className="text-xs text-muted-foreground">{t("nwsUsOnly")}</p>}
             </Field>
 
             <Field>
               <FieldLabel>{t("rules")}</FieldLabel>
               <ToggleGroup
                 variant="outline"
-                value={[ruleSetId]}
+                value={[regionRef.ruleSetId]}
                 onValueChange={(v) => {
                   const next = v[0] as RuleSetId | undefined
                   if (!next) return
@@ -241,11 +275,11 @@ export function QuickCheck() {
                   <ToggleGroupItem key={r.id} value={r.id}>{regionLabel(r.id)}</ToggleGroupItem>
                 ))}
               </ToggleGroup>
-              {ruleSetId === "ksi-2015" && <p className="text-xs text-muted-foreground">{t("ksiHelp")}</p>}
-              {ruleSetId === "uil-2026-27" && data?.suggestion.inTexas && (
+              {regionRef.ruleSetId === "ksi-2015" && <p className="text-xs text-muted-foreground">{t("ksiHelp")}</p>}
+              {regionRef.ruleSetId === "uil-2026-27" && data?.suggestion.inTexas && (
                 <p className="text-xs text-muted-foreground">{t("suggestedClass", { region: regionLabel(data.suggestion.regionId) })}</p>
               )}
-              {ruleSetId === "uil-2026-27" && data?.suggestion.nearBoundary && (
+              {regionRef.ruleSetId === "uil-2026-27" && data?.suggestion.nearBoundary && (
                 <p className="text-xs text-muted-foreground">{t("nearBoundary")}</p>
               )}
             </Field>

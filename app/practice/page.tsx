@@ -14,8 +14,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Params = z.object({
-  lat: z.coerce.number().min(18).max(72).catch(30.2672),
-  lon: z.coerce.number().min(-180).max(-60).catch(-97.7431),
+  lat: z.coerce.number().min(-90).max(90).catch(30.2672),
+  lon: z.coerce.number().min(-180).max(180).catch(-97.7431),
   region: z.enum(["class2", "class3"]).catch("class3"),
   sport: z.enum(SPORTS).catch("football"),
 })

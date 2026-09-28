@@ -121,7 +121,7 @@
     "locationDenied": "Se negó el permiso de ubicación. Busque un lugar.",
     "rules": "Reglas",
     "rulesUil": "UIL De Texas",
-    "rulesKsi": "Otro Estado (KSI)",
+    "rulesKsi": "Fuera De Texas (KSI)",
     "region": "Región",
     "class3": "Clase 3",
     "class2": "Clase 2",
@@ -157,7 +157,12 @@
     "error": "No pudimos cargar el pronóstico. Intente de nuevo en un momento.",
     "retry": "Intentar De Nuevo",
     "disclaimer": "Estimación de planificación a partir de pronósticos del Servicio Meteorológico Nacional y Open-Meteo. No es una medición. Tome una lectura donde practican los atletas.",
-    "startPractice": "Iniciar Práctica Aquí"
+    "startPractice": "Iniciar Práctica Aquí",
+    "myLocation": "Mi Ubicación",
+    "accuracy": "Tu dispositivo te ubicó con una precisión de unos {meters} m.",
+    "accuracyRough": "Tu dispositivo solo te ubicó con una precisión de unos {km} km, así que puede no ser el lugar correcto. Busca tu escuela o ciudad para mayor exactitud.",
+    "locationUnavailable": "No pudimos obtener tu ubicación. Busca un lugar.",
+    "nwsUsOnly": "El Servicio Meteorológico Nacional solo cubre EE. UU. Fuera de EE. UU. este pronóstico usa solo el modelo de Flagline."
   },
   "req": {
     "maxTime": "Tiempo máximo de práctica",
@@ -293,7 +298,13 @@
     "readingLevel": "Esta lectura es {level} en {region}.",
     "decimalHint": "Toque el valor o use los botones para ajustar.",
     "stepDown": "Bajar 0.1",
-    "stepUp": "Subir 0.1"
+    "stepUp": "Subir 0.1",
+    "photoReading": "Leyendo El Medidor",
+    "photoDetected": "Se detectó {value}° WBGT. Verifique que coincida con el medidor y guarde.",
+    "photoManual": "No pudimos leer bien el medidor. Ingrese el valor a mano.",
+    "photoFar": "Está a más de 8° del pronóstico. Revise el medidor.",
+    "photoNotConfigured": "La lectura por foto no está configurada. Ingrese el valor a mano.",
+    "photoPrivacy": "La foto se lee una vez y no se guarda."
   },
   "emergency": {
     "title": "Protocolo De Golpe De Calor Por Esfuerzo",
