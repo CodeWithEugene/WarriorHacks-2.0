@@ -53,13 +53,22 @@ What is built so far (all after the theme reveal):
 | Practice Mode (`/practice`) client-side demo: setup, pre-check, recheck countdown, breaks, time used, level-change confirmation, cooling checklist, thunder hold, live log, end and sign, CSV export, wake lock, session restore | Done |
 | Emergency protocol (`/emergency`) with cooling timer, 911 after cooling, temperature entries, incident timeline | Done |
 | English and Spanish catalogs, light, dark and sunlight themes | Done |
-| Database, auth, schools and teams, check-ins, Jev features, push, PDF | Next |
+| Neon Postgres + Drizzle (teams, practices, check-ins); capability links instead of accounts (only SHA-256 hashes of coach tokens stored) | Done |
+| Coach dashboard (`/coach/<token>`): conditions, 7-day planner grid, Ask Flagline, start practice, recent practices | Done |
+| Synced Practice Mode with check-in QR, check-in queue (10 s polling) and emergency alert dialog | Done |
+| Athlete check-in (`/c/<token>`) with recall-first triage (tapped red flags, en/es keyword backstop, Jev Noul/Score/Choice) | Done; live eval 100% recall (25/25), 0/8 false alarms, 8 caught only by Jev |
+| Ask Flagline (chrono-node candidates + one Jev request, confidence gated; deterministic plan evaluation and best windows) | Done |
+| Public parent page (`/t/<slug>`) and demo team seed | Done |
+| Production deploy | Done: https://flagline-seven.vercel.app |
+| Web push, PDF export, meter photo (needs an Anthropic key), accounts | Next |
 
 Deviations from the spec above (intentional):
 - **Locale is cookie-based** (next-intl without `[locale]` URL segments). Simpler routing; `/` serves English or Spanish from the `NEXT_LOCALE` cookie or `Accept-Language`.
 - **Layout is near full width**: a `page-col` utility (in `app/globals.css`) makes every page column fill the viewport minus a small inset (up to 1920 px) and draws the dashed left and right guide lines, including the header and footer.
 - **Rate limiting** uses a small in-memory limiter (`lib/rate-limit.ts`) until Upstash Redis is provisioned.
-- **Practice Mode is currently client-only** (state in the browser, restored from localStorage) so it works offline and without accounts; it will sync to the server session model in section 13 once the database lands.
+- **Two Practice Modes:** `/practice` is a client-only demo (localStorage); team practices under `/coach/<token>/practice/<id>` sync every change to Postgres (debounced 800 ms).
+- **No accounts yet:** access uses capability links (coach link, check-in token, public slug) because no email or OAuth provider is configured; Better Auth remains the plan in section 12.
+- **Check-in alerts use polling** (every 10 s) until web push lands.
 - **ESLint:** `eslint-plugin-react` version detection is broken under ESLint 10, so the React version is pinned in `eslint.config.mjs`; generated shadcn files (`components/ui`, `hooks/use-mobile.ts`) are excluded from lint.
 
 ## 0. Scope And Definition Of Done

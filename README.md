@@ -2,6 +2,8 @@
 
 **Free heat and smoke safety for every outdoor practice.** Flagline tells coaches what today's practice can look like, runs the 30-minute WBGT rechecks and keeps the UIL log.
 
+**Live:** https://flagline-seven.vercel.app · **Demo team (coach view):** https://flagline-seven.vercel.app/coach/demo-pecan-creek-coach-2026
+
 Built for **[WarriorHacks 2.0](https://warriorhacks-2-0.devpost.com/)** (Westwood Computer Science Club, Austin, Texas; online, Sep 28 to Oct 12, 2026), Hackathon track.
 
 > **Theme:** "Create a project that solves an issue in your community, county, state, or nation."
@@ -55,7 +57,26 @@ pnpm test         # WBGT physics, UIL conformance, conditions and practice state
 pnpm lint && pnpm typecheck && pnpm build
 ```
 
-No API keys are needed for the current build: weather comes from the National Weather Service and Open-Meteo, which are keyless. Pages: `/` (home), `/check` (Quick Check), `/practice` (Practice Mode demo), `/emergency` (heat stroke protocol).
+Environment: `DATABASE_URL` (Neon Postgres, provisioned through the Vercel Marketplace; `pnpm dlx vercel env pull .env.local`) and `TYPESAFE_API_KEY` (TypeSafe Jev, server-side only). Weather data is keyless.
+
+```bash
+pnpm db:migrate     # apply Drizzle migrations
+pnpm db:seed        # create or reset the fictional demo team
+pnpm eval:triage    # live Jev eval: red-flag recall must be 100%
+pnpm eval:ask       # live Ask Flagline smoke test
+```
+
+| Page | What it is |
+|---|---|
+| `/` | Home |
+| `/check` | Quick Check for any US location |
+| `/teams/new` | Create a team (returns a private coach link) |
+| `/coach/<token>` | Coach dashboard: conditions, Ask Flagline, 7-day planner, practices |
+| `/coach/<token>/practice/<id>` | Synced Practice Mode with the athlete check-in QR and queue |
+| `/c/<token>` | Athlete check-in (no login, English and Spanish) |
+| `/t/<slug>` | Public team page for parents |
+| `/practice` | Offline Practice Mode demo (no account) |
+| `/emergency` | Exertional heat stroke protocol |
 
 Full bootstrapping commands are in [docs/build.md](./docs/build.md) section 4.
 
