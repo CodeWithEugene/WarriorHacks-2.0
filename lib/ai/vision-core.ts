@@ -27,6 +27,9 @@ export type MeterResult =
   | { status: "ok"; valueF: number; confidence: number; isHeatScreen: number; farFromForecast: boolean; transcription: Transcription; visionModel: string; jevModel: string | null }
   | { status: "manual"; reason: "no_numbers" | "low_confidence" | "out_of_range" | "not_configured" | "vision_error"; transcription?: Transcription }
 
+const MAX_TOKENS = 2000
+const TIMEOUT_MS = 30_000
+
 const PROMPT =
   'You transcribe instrument displays. List every number shown on this device screen with the label or unit printed next to it. ' +
   'Do not interpret or compute anything. Reply with JSON only: {"device": string|null, "readings":[{"id":"r1","value":number,"unit":string|null,"label":string|null}]}'
@@ -58,14 +61,17 @@ export async function transcribe(opts: { apiKey: string; model: string; imageDat
     body: JSON.stringify({
       model: opts.model,
       temperature: 0,
-      max_tokens: 400,
+      // GLM vision models reason before answering; keep reasoning short and out of the reply.
+      max_tokens: MAX_TOKENS,
+      reasoning: { effort: "low", exclude: true },
       messages: [{ role: "user", content: [{ type: "text", text: PROMPT }, { type: "image_url", image_url: { url: opts.imageDataUrl } }] }],
     }),
-    signal: AbortSignal.timeout(20_000),
+    signal: AbortSignal.timeout(TIMEOUT_MS),
   })
-  if (!res.ok) throw new Error(`vision HTTP ${res.status}`)
-  const json = (await res.json()) as { choices?: { message?: { content?: string } }[] }
+  if (!res.ok) throw new Error(`vision HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`)
+  const json = (await res.json()) as { choices?: { message?: { content?: string }; finish_reason?: string }[] }
   const content = json.choices?.[0]?.message?.content ?? ""
+  if (!content.trim()) throw new Error(`vision reply empty (finish_reason ${json.choices?.[0]?.finish_reason ?? "unknown"})`)
   return Transcription.parse(extractJson(content))
 }
 

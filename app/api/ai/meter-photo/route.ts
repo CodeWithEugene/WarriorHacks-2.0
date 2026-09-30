@@ -26,7 +26,8 @@ export async function POST(req: Request) {
     const transcription = await transcribe({ apiKey, model, imageDataUrl: parsed.data.image, appUrl: process.env.NEXT_PUBLIC_APP_URL ?? "https://flagline.codewitheugene.top" })
     const selection = await selectWbgt(getJev(), transcription)
     return ok(finalize(transcription, selection, parsed.data.forecastF ?? null, model))
-  } catch {
+  } catch (e: unknown) {
+    console.error("meter-photo: vision failed", { model, error: e instanceof Error ? e.message : String(e) })
     return ok({ status: "manual", reason: "vision_error" })
   }
 }
