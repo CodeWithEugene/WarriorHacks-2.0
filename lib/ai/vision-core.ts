@@ -1,6 +1,6 @@
 /**
  * Meter photo reading.
- * Step 1 (vision, OpenRouter GLM): transcribe the numbers and labels on the display. No interpretation.
+ * Step 1 (vision, OpenRouter Kimi K3): transcribe the numbers and labels on the display. No interpretation.
  * Step 2 (TypeSafe Jev): choose which transcribed number is the WBGT, and check it is a heat stress screen.
  * Step 3 (code): convert units, validate range, compare with the forecast. The coach confirms before logging.
  */
@@ -8,7 +8,7 @@ import type { TypeSafeClient } from "@typesafe-ai/sdk"
 import { choice, noul } from "@typesafe-ai/sdk"
 import * as z from "zod"
 
-export const DEFAULT_VISION_MODEL = "z-ai/glm-5.3-flash"
+export const DEFAULT_VISION_MODEL = "moonshotai/kimi-k3"
 const JEV_MODEL = "jev-latest"
 export const MIN_F = 40
 export const MAX_F = 120
@@ -61,7 +61,7 @@ export async function transcribe(opts: { apiKey: string; model: string; imageDat
     body: JSON.stringify({
       model: opts.model,
       temperature: 0,
-      // GLM vision models reason before answering; keep reasoning short and out of the reply.
+      // Vision models on OpenRouter may reason before answering; keep reasoning short and out of the reply.
       max_tokens: MAX_TOKENS,
       reasoning: { effort: "low", exclude: true },
       messages: [{ role: "user", content: [{ type: "text", text: PROMPT }, { type: "image_url", image_url: { url: opts.imageDataUrl } }] }],

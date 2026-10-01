@@ -42,7 +42,7 @@ Flagline turns the forecast and on-site readings into a practice plan, a sidelin
 
 ## Planned Stack
 
-Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · **shadcn/ui** (base-nova, Base UI primitives, lucide icons, Geist fonts) · Postgres (Neon) with Drizzle ORM · Better Auth · **TypeSafe Jev** for typed AI judgments · Claude vision for meter photos only · Vercel Workflow SDK for durable practice timers · Web Push · Serwist PWA (offline Practice Mode) · next-intl (English, Spanish) · Vitest, Playwright and axe · Vercel.
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · **shadcn/ui** (base-nova, Base UI primitives, lucide icons, Geist fonts) · Postgres (Neon) with Drizzle ORM · Better Auth · **TypeSafe Jev** for typed AI judgments · OpenRouter vision (Kimi K3) for meter photos only · Vercel Workflow SDK for durable practice timers · Web Push · Serwist PWA (offline Practice Mode) · next-intl (English, Spanish) · Vitest, Playwright and axe · Vercel.
 
 Data: National Weather Service gridpoint WBGT (no key), Open-Meteo forecast and air quality (no key), AirNow (free key, optional), US Census geocoder.
 
@@ -57,7 +57,7 @@ pnpm test         # WBGT physics, UIL conformance, conditions and practice state
 pnpm lint && pnpm typecheck && pnpm build
 ```
 
-Environment: `DATABASE_URL` (Neon Postgres, provisioned through the Vercel Marketplace; `pnpm dlx vercel env pull .env.local`) and `TYPESAFE_API_KEY` (TypeSafe Jev, server-side only). Weather data is keyless.
+Environment: `DATABASE_URL` (Neon Postgres, provisioned through the Vercel Marketplace; `pnpm dlx vercel env pull .env.local`) `TYPESAFE_API_KEY` (TypeSafe Jev, server-side only) and `OPENROUTER_API_KEY` (meter photos, server-side only). Weather data is keyless.
 
 ```bash
 pnpm db:migrate     # apply Drizzle migrations
@@ -97,7 +97,7 @@ Flagline will provide planning estimates and workflow support. It is not a medic
 
 WarriorHacks allows AI tools with disclosure. So far:
 - **Planning and research:** Claude (Anthropic) via Claude Code assisted with research, analysis and drafting of the documents in `docs/`. TypeSafe Jev was used to independently score candidate problems ([docs/research.md](./docs/research.md) section 4).
-- **In the product (planned):** TypeSafe Jev for typed judgments (plan parsing, athlete check-in red-flag screening, meter value selection); Claude vision only to transcribe digits from meter photos. AI never decides a heat level, a practice limit or that an athlete is fine.
+- **In the product (planned):** TypeSafe Jev for typed judgments (plan parsing, athlete check-in red-flag screening, meter value selection); OpenRouter vision (Kimi K3) only to transcribe digits from meter photos. AI never decides a heat level, a practice limit or that an athlete is fine.
 - Coding assistants used during the build will be listed here.
 
 ## Contributing

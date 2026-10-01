@@ -1,5 +1,5 @@
 /**
- * Live eval of meter photo reading (OpenRouter GLM vision + Jev selection).
+ * Live eval of meter photo reading (OpenRouter vision + Jev selection).
  * Run: pnpm eval:meter   (requires OPENROUTER_API_KEY and TYPESAFE_API_KEY)
  * Files in tests/ai-evals/meter-photos are named <anything>-<expected with _ for the decimal point>.png
  */
