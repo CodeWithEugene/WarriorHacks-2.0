@@ -141,6 +141,8 @@ export async function parsePlan(jev: TypeSafeClient | null, input: { text: strin
     const gear = pick<PlanGear>("gear", fallback.gear)
     const startId = starts.length > 1 ? pick("start", starts[0]!.id) : starts[0]?.id
     const minutesId = durations.length > 1 ? pick("minutes", durations[0]!.id) : durations[0]?.id
+    // A stated start time settles the intent ("check this plan"), so an unsure intent is not worth asking about.
+    const settled = starts.length > 0 || picked === fallback.intent
     return {
       intent,
       gear,
@@ -148,7 +150,7 @@ export async function parsePlan(jev: TypeSafeClient | null, input: { text: strin
       start: starts.find((s) => s.id === startId)?.value ?? null,
       minutes: durations.find((d) => d.id === minutesId)?.value ?? null,
       day,
-      lowConfidence: low,
+      lowConfidence: settled ? low.filter((k) => k !== "intent") : low,
       model: res.model,
     }
   } catch {

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 
 const FIRST_HOUR = 6
 const LAST_HOUR = 21
+const HOUR_MS = 3_600_000
 
 function localParts(t: number, timeZone: string) {
   const parts = new Intl.DateTimeFormat("en-US", { timeZone, year: "numeric", month: "2-digit", day: "2-digit", hour: "numeric", hourCycle: "h23" }).formatToParts(t)
@@ -14,12 +15,13 @@ function localParts(t: number, timeZone: string) {
   return { day: `${get("year")}-${get("month")}-${get("day")}`, hour: Number(get("hour")) }
 }
 
-/** Seven days by practice hours (6 AM to 9 PM local), each cell a forecast flag. */
-export function PlannerGrid({ hours, timeZone }: { hours: CombinedHour[]; timeZone: string }) {
+/** Seven days by practice hours (6 AM to 9 PM local), each cell a forecast flag. Hours already over are left out. */
+export function PlannerGrid({ hours, timeZone, now }: { hours: CombinedHour[]; timeZone: string; now: number }) {
   const locale = useLocale()
   const tz = useTranslations("zone")
   const days = new Map<string, Map<number, CombinedHour>>()
   for (const h of hours) {
+    if (h.t + HOUR_MS <= now) continue
     const { day, hour } = localParts(h.t, timeZone)
     if (hour < FIRST_HOUR || hour > LAST_HOUR || h.planningF === null) continue
     if (!days.has(day)) days.set(day, new Map())

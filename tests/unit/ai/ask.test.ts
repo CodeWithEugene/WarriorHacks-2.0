@@ -43,3 +43,24 @@ describe("parsePlan without Jev", () => {
     expect(p.minutes).toBe(120)
   })
 })
+
+describe("parsePlan intent gate", () => {
+  const unsureJev = (intent: string) =>
+    ({
+      systemOne: async () => ({
+        model: "jev-test",
+        answers: { intent: { choice: intent, confidence: 0.4 }, gear: { choice: "full_pads", confidence: 0.9 }, conditioning: { noul: 0.1 } },
+      }),
+    }) as unknown as Parameters<typeof parsePlan>[0]
+
+  it("does not flag an unsure intent when a stated start time settles it", async () => {
+    const p = await parsePlan(unsureJev("find_best_window"), { text: "Can we go full pads 4 to 6 tomorrow?", now: NOW, timeZone: TZ, locale: "en", sport: "football" })
+    expect(p.intent).toBe("check_plan")
+    expect(p.lowConfidence).not.toContain("intent")
+  })
+
+  it("still flags an unsure intent when no start time was given", async () => {
+    const p = await parsePlan(unsureJev("rules_now"), { text: "what about pads tomorrow", now: NOW, timeZone: TZ, locale: "en", sport: "football" })
+    expect(p.lowConfidence).toContain("intent")
+  })
+})

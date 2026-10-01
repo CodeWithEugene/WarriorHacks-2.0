@@ -90,7 +90,7 @@ export default async function CoachPage({ params }: { params: Promise<{ token: s
             <CardDescription>{t("plannerLead")}</CardDescription>
           </CardHeader>
           <CardContent>
-            <PlannerGrid hours={conditions.hours} timeZone={team.timeZone} />
+            <PlannerGrid hours={conditions.hours} timeZone={team.timeZone} now={now} />
           </CardContent>
         </Card>
 
