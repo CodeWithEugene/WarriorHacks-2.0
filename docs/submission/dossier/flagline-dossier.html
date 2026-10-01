@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Flagline Project Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+  @page { size: 8.5in 11in; margin: 0; }
+  :root {
+    --paper: #F6F4EF; --ink: #141414; --muted: #5E5E5E; --hair: rgba(20,20,20,.12); --card: #FFFFFF;
+    --green: #1E7B45; --yellow: #F4C534; --orange: #F08A2E; --red: #D9463B; --black: #111111;
+    --ribbon: linear-gradient(90deg, var(--green) 0%, var(--yellow) 30%, var(--orange) 55%, var(--red) 80%, var(--black) 100%);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); }
+  body { font-family: "Geist", system-ui, sans-serif; color: var(--ink); font-size: 10.2pt; line-height: 1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; padding: 0.62in 0.7in 0.75in; page-break-after: always; break-after: page; background: var(--paper); }
+  .page:last-child { page-break-after: auto; }
+  .page::before, .page::after { content: ""; position: absolute; top: 0; bottom: 0; border-left: 1px dashed var(--hair); }
+  .page::before { left: 0.4in; } .page::after { right: 0.4in; }
+  .foot { position: absolute; left: 0.7in; right: 0.7in; bottom: 0.38in; display: flex; justify-content: space-between; font-family: "Geist Mono", monospace; font-size: 7.5pt; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+  .kicker { font-family: "Geist Mono", monospace; font-size: 8pt; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-weight: 300; font-size: 34pt; letter-spacing: -.035em; line-height: 1.02; margin: 6pt 0 10pt; }
+  h2 { font-weight: 600; font-size: 13pt; letter-spacing: -.01em; margin: 14pt 0 5pt; }
+  h3 { font-weight: 600; font-size: 10.5pt; margin: 9pt 0 3pt; }
+  p { margin: 0 0 6pt; }
+  .lead { font-size: 12.5pt; line-height: 1.42; font-weight: 400; color: var(--ink); margin-bottom: 10pt; }
+  .muted { color: var(--muted); }
+  .rule { height: 4px; border-radius: 2px; background: var(--ribbon); width: 2.2in; margin: 4pt 0 14pt; }
+  ul, ol { margin: 0 0 6pt 14pt; } li { margin: 0 0 3pt; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14pt; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10pt; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9pt; }
+  .card { background: var(--card); border: 1px solid var(--hair); border-radius: 10pt; padding: 10pt 12pt; }
+  .card h3 { margin-top: 0; }
+  .stat { background: var(--card); border: 1px solid var(--hair); border-radius: 10pt; padding: 10pt 11pt; }
+  .stat .n { font-family: "Geist Mono", monospace; font-size: 20pt; letter-spacing: -.03em; line-height: 1; }
+  .stat .l { font-size: 8.4pt; color: var(--muted); margin-top: 5pt; line-height: 1.32; }
+  .stat .s { font-size: 6.8pt; color: var(--muted); margin-top: 4pt; font-family: "Geist Mono", monospace; }
+  table td, table th { } table { width: 100%; border-collapse: collapse; font-size: 8.4pt; line-height: 1.32; background: var(--card); border: 1px solid var(--hair); border-radius: 8pt; overflow: hidden; }
+  th, td { text-align: left; vertical-align: top; padding: 5pt 7pt; border-bottom: 1px solid var(--hair); }
+  th { font-weight: 600; background: #EFEDE8; font-size: 8pt; }
+  tr:last-child td { border-bottom: 0; }
+  .chip { display: inline-block; border-radius: 999px; padding: 1.5pt 7pt; font-size: 7.6pt; font-weight: 600; letter-spacing: .02em; }
+  .g { background: var(--green); color: #fff; } .y { background: var(--yellow); color: #3a2a00; } .o { background: var(--orange); color: #2b1400; }
+  .r { background: var(--red); color: #fff; } .k { background: var(--black); color: #fff; } .line { border: 1px solid var(--ink); color: var(--ink); }
+  .tour .shot { width: 5.15in; margin-left: auto; margin-right: auto; }
+  .tour .cap { width: 5.15in; margin-left: auto; margin-right: auto; }
+  .shot { background: #fff; border: 1px solid var(--hair); border-radius: 9pt; overflow: hidden; box-shadow: 0 8pt 20pt rgba(20,20,20,.10); }
+  .shot img { display: block; width: 100%; }
+  .cap { font-size: 8.4pt; color: var(--muted); margin-top: 5pt; }
+  .callout { border-left: 3px solid var(--orange); padding: 6pt 10pt; background: #fff; border-radius: 0 8pt 8pt 0; margin: 8pt 0; }
+  .mono { font-family: "Geist Mono", monospace; }
+  .num { font-family: "Geist Mono", monospace; color: var(--muted); font-size: 8pt; }
+  .tick::before { content: "\2713  "; color: var(--green); font-weight: 700; }
+  .next::before { content: "\25CB  "; color: var(--muted); }
+  .arch { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 10pt; align-items: stretch; }
+  .arch .col { display: grid; gap: 8pt; align-content: start; }
+  .box { background: #fff; border: 1px solid var(--hair); border-radius: 8pt; padding: 7pt 9pt; font-size: 8.3pt; line-height: 1.3; }
+  .box b { display: block; font-size: 8.8pt; margin-bottom: 2pt; }
+  .box.dark { background: var(--ink); color: #F6F4EF; border-color: var(--ink); }
+  .box.ai { border-color: var(--orange); }
+  .flow { font-family: "Geist Mono", monospace; font-size: 7.6pt; color: var(--muted); text-align: center; letter-spacing: .05em; }
+  /* Cover */
+  .cover { padding: 0.8in 0.8in; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 14pt; }
+  .mark { width: 54pt; height: 54pt; border-radius: 13pt; background: linear-gradient(115deg, var(--green) 0%, var(--yellow) 30%, var(--orange) 55%, var(--red) 80%, var(--black) 100%); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
+  .mark svg { width: 30pt; height: 30pt; }
+  .wordmark { font-weight: 600; font-size: 40pt; letter-spacing: -.045em; }
+  .cover h1 { font-size: 46pt; margin-top: 30pt; }
+  .ladder { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6pt; }
+  .ladder div { border-radius: 8pt; padding: 7pt 9pt; font-size: 8pt; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+  .ladder span { display: block; font-family: "Geist Mono", monospace; font-weight: 500; font-size: 9.5pt; letter-spacing: 0; text-transform: none; margin-top: 2pt; }
+  .toc { counter-reset: t; }
+  .toc div { break-inside: avoid; display: flex; justify-content: space-between; border-bottom: 1px dashed var(--hair); padding: 4pt 0; font-size: 9.6pt; }
+  .toc span:last-child { font-family: "Geist Mono", monospace; color: var(--muted); }
+  .src { font-size: 7.4pt; line-height: 1.38; color: var(--muted); }
+  .src li { margin-bottom: 2.2pt; word-break: break-word; }
+  .two-col { columns: 2; column-gap: 18pt; }
+</style>
+</head>
+<body>
+
+<!-- 1. COVER -->
+<section class="page cover">
+  <div class="brand">
+    <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/></svg></div>
+    <div class="wordmark">Flagline</div>
+  </div>
+  <h1>Heat rules, handled<br>on the sideline.</h1>
+  <p class="lead" style="max-width: 5.6in">A free web app that helps every Texas school follow the new UIL heat rule for outdoor athletics and marching band: plan the practice, run the 30-minute rechecks, hear from athletes early, act fast in an emergency, and keep the record.</p>
+  <div class="rule" style="width: 3.4in"></div>
+  <div class="shot" style="margin-top: 6pt"><img src="img/thumbnail.jpg" alt="Flagline thumbnail"></div>
+  <div style="margin-top: auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 18pt; font-size: 9pt">
+    <div>
+      <div class="kicker">Project Dossier</div>
+      <div style="margin-top: 4pt">WarriorHacks 2.0 · Hackathon track<br>Theme: solve an issue in your community, county, state or nation<br>October 2026</div>
+    </div>
+    <div>
+      <div class="kicker">Try It</div>
+      <div class="mono" style="margin-top: 4pt; font-size: 8.4pt">flagline.codewitheugene.top<br>…/coach/demo-pecan-creek-coach-2026<br>github.com/CodeWithEugene/WarriorHacks-2.0</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. AT A GLANCE -->
+<section class="page">
+  <div class="kicker">01 · At A Glance</div>
+  <h1>The short version</h1>
+  <div class="grid2" style="margin-top: 6pt; font-size: 9.3pt; gap: 10pt">
+    <div class="card"><h3>The issue</h3><p>From <b>August 1, 2026</b>, Texas UIL requires a wet bulb globe temperature (WBGT) reading before and every 30 minutes during every outdoor practice and marching band rehearsal, with limits on time, breaks and football gear at each flag level. Coaches and band directors, not trainers, usually run it. Paid systems cost hundreds to thousands of dollars per site. Exertional heat stroke is the leading preventable cause of death in high school football.</p></div>
+    <div class="card"><h3>What we built</h3><p><b>Flagline</b>, a free, bilingual (English and Spanish) web app with no hardware and no accounts. It shows the flag now and for the next 7 days, answers plain-language plans, runs Practice Mode with timers and a meter photo reader, routes athlete check-ins with red-flag alerts, guides the heat stroke protocol and logs everything.</p></div>
+    <div class="card"><h3>Why it is trustworthy</h3><p>The safety core is deterministic code: a real physics model (Liljegren WBGT) checked against <b>288 reference cases</b>, UIL thresholds stored as versioned data with a conformance suite, <b>442 automated tests</b>. AI only interprets language and photos, gated on confidence. It never sets a flag level, a limit, or clears an athlete.</p></div>
+    <div class="card"><h3>Status</h3><p><b>Live in production</b> at flagline.codewitheugene.top with a fictional demo team. Every feature in this dossier marked built works today on the live site. Open source under MIT.</p></div>
+  </div>
+  <div class="grid4" style="margin-top: 12pt">
+    <div class="stat"><div class="n">Aug 1</div><div class="l">2026 start of the UIL WBGT mandate</div></div>
+    <div class="stat"><div class="n">$0</div><div class="l">cost to schools; no hardware, no install</div></div>
+    <div class="stat"><div class="n">25/25</div><div class="l">red-flag check-ins routed to emergency in our eval, 0 of 8 false alarms</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">languages across every screen (462 messages each)</div></div>
+  </div>
+  <h2 style="margin-top: 12pt">Contents</h2>
+  <div class="toc" style="columns: 2; column-gap: 22pt">
+    <div><span>The problem</span><span>3</span></div>
+    <div><span>Who it hurts and why it keeps happening</span><span>4</span></div>
+    <div><span>What exists today, and the gap</span><span>5</span></div>
+    <div><span>The solution</span><span>6</span></div>
+    <div><span>Product tour (five pages of the live app)</span><span>7</span></div>
+    <div><span>How it works</span><span>12</span></div>
+    <div><span>The heat engine and the rules</span><span>13</span></div>
+    <div><span>The AI layer</span><span>14</span></div>
+    <div><span>Safety, privacy and accessibility</span><span>15</span></div>
+    <div><span>Quality and evidence</span><span>16</span></div>
+    <div><span>Impact, feasibility and adoption</span><span>17</span></div>
+    <div><span>Judging criteria and theme fit</span><span>18</span></div>
+    <div><span>Built, next and the build log</span><span>19</span></div>
+    <div><span>Credits, AI disclosure and sources</span><span>20</span></div>
+  </div>
+  <div class="foot"><span>Flagline · Project Dossier</span><span>2</span></div>
+</section>
+
+<!-- 3. PROBLEM I -->
+<section class="page">
+  <div class="kicker">02 · The Problem</div>
+  <h1>A new rule, a deadly risk,<br>and no one to run it</h1>
+  <p class="lead">Every afternoon from August to October, someone decides whether and how a team practices in dangerous heat. The right measure is WBGT, which combines air temperature, humidity, wind and sun. It is not the number on a weather app.</p>
+  <div class="callout"><b>UIL, 2026-27:</b> “The use of Wet Bulb Globe Temperature (WBGT) to monitor environmental conditions and guide activity modifications is no longer a recommendation, but a required standard for all UIL outdoor athletic and marching band activities.” Readings are required within 15 minutes before practice and every 30 minutes during it.</div>
+  <h2>The stakes</h2>
+  <div class="grid3">
+    <div class="stat"><div class="n">#1</div><div class="l">Exertional heat stroke is the leading preventable cause of death in youth, high school and college football, nearly 3 deaths per season</div><div class="s">NFHS SMAC task force, 2026</div></div>
+    <div class="stat"><div class="n">9,237</div><div class="l">time-loss heat illnesses among US high school athletes each year; football's rate is 10 times other sports</div><div class="s">CDC MMWR 59(32)</div></div>
+    <div class="stat"><div class="n">100%</div><div class="l">survival when cooling starts within 10 minutes of collapse. The order matters: cool first, transport second</div><div class="s">UIL resources</div></div>
+    <div class="stat"><div class="n">67</div><div class="l">exertional heat stroke deaths in US secondary school sports, 1982 to 2022; 94% in football</div><div class="s">Stearns et al., Sports Health 2025</div></div>
+    <div class="stat"><div class="n">~80%</div><div class="l">of Texas coaches surveyed call the WBGT requirement too restrictive; there is no UIL requirement to employ a trainer</div><div class="s">Houston Public Media, Aug 2026</div></div>
+    <div class="stat"><div class="n">2/7</div><div class="l">Texas score on heat acclimatization policy; 0/3 on cold-water immersion before transport</div><div class="s">Korey Stringer Institute, 2025-26</div></div>
+  </div>
+  <h2>It is local</h2>
+  <p>A 15-year-old Lancaster (Dallas area) player died of heat stroke in August 2025 after conditioning in a non-air-conditioned facility. An Austin Bowie High School player spent time in the ICU after heat stroke in a 2023 game. Band is at risk too: about 400 marching band members with exertional heat illness were reported in the news from 1990 to 2020, with no national band standard, and a university band member died after collapsing at a 91 F game on September 5, 2026.</p>
+  <h2>It is national</h2>
+  <p>A record 8,266,244 US high school students played sports in 2024-25 (NFHS). Texas joins at least 17 other states that require WBGT-guided practices, and states have adopted nearly 200 heat-illness prevention policies since 2017. Parents estimate their kids lost about a week of practices and games in 2024 to heat, smoke and other weather.</p>
+  <div class="foot"><span>Flagline · The problem</span><span>3</span></div>
+</section>
+
+<!-- 4. PROBLEM II -->
+<section class="page">
+  <div class="kicker">02 · The Problem</div>
+  <h1>Who it hurts, and<br>why it keeps happening</h1>
+  <table style="font-size: 7.9pt">
+    <tr><th style="width: 22%">Person</th><th style="width: 36%">Their day</th><th>What hurts today</th></tr>
+    <tr><td><b>Head coach</b></td><td>Teaches all day, runs practice 3:45 to 6:00 pm for 60 to 120 athletes</td><td>Checks a weather app and guesses; forgets 30-minute rechecks when practice gets busy; no records</td></tr>
+    <tr><td><b>Band director</b></td><td>Rehearses 150+ students on a hot parking lot, 4:00 to 7:00 pm, Sep to Nov</td><td>UIL rules now cover band; band culture is less used to heat protocols; often no trainer on site</td></tr>
+    <tr><td><b>Athletic trainer</b></td><td>One trainer for several sports on several fields</td><td>Cannot be at every field; needs every field's status and every athlete red flag in one place</td></tr>
+    <tr><td><b>Athletic director</b></td><td>Oversees compliance for a campus</td><td>Needs evidence that every practice followed the protocol</td></tr>
+    <tr><td><b>Student athlete</b></td><td>14 to 18 years old, practicing in the heat</td><td>Pressure not to complain; no private, low-friction way to say “I feel wrong”</td></tr>
+    <tr><td><b>Parent</b></td><td>Gets cancellation texts</td><td>No view of the conditions or the reasons behind decisions</td></tr>
+  </table>
+  <h2>The routine today, and where it breaks</h2>
+  <table style="font-size: 7.9pt">
+    <tr><th style="width: 22%">Step</th><th>What should happen</th><th style="width: 38%">What actually goes wrong</th></tr>
+    <tr><td>Planning</td><td>Know the expected flag and move practice or change gear</td><td>Weather apps show air temperature or heat index, not WBGT</td></tr>
+    <tr><td>Pre-practice</td><td>A reading within 15 minutes before the start</td><td>Nobody owns it; skipped or taken in the wrong spot</td></tr>
+    <tr><td>Applying the rules</td><td>Right class (Class 2 or 3), right row, gear and cooling limits</td><td>Wrong class, wrong row, gear limits forgotten</td></tr>
+    <tr><td>During practice</td><td>A reading every 30 minutes; switch to stricter rules at once</td><td>Forgotten in the flow of coaching 100 teenagers</td></tr>
+    <tr><td>Warning signs</td><td>Recognize early; cool first, then call 911</td><td>Late recognition; transport before cooling</td></tr>
+    <tr><td>Records</td><td>Keep WBGT records on file</td><td>A clipboard lost in a locker room, or nothing</td></tr>
+    <tr><td>Smoke days</td><td>Check AQI in the same decision</td><td>A separate app, often not checked</td></tr>
+  </table>
+  <h2>Root causes</h2>
+  <div class="grid3" style="gap: 6pt 14pt; font-size: 8.6pt">
+    <div><b>Wrong tool.</b> Weather apps do not show WBGT or know sport rules.</div>
+    <div><b>Cost.</b> Meters cost $549+; site systems about $3,500 per site per year.</div>
+    <div><b>Load at the worst time.</b> Rechecks compete with coaching in sun and noise.</div>
+    <div><b>Tables, not workflows.</b> No one turns the chart into today's timeline.</div>
+    <div><b>No loop for symptoms.</b> Students under-report; adults miss early signs.</div>
+    <div><b>No records by default.</b> Evidence of compliance is an afterthought.</div>
+  </div>
+  <div class="foot"><span>Flagline · The problem</span><span>4</span></div>
+</section>
+
+<!-- 5. EXISTING -->
+<section class="page">
+  <div class="kicker">03 · What Exists Today</div>
+  <h1 style="font-size: 30pt">Tools give a number.<br>None runs the practice.</h1>
+  <table style="font-size: 7.5pt">
+    <tr><th style="width: 21%"></th><th>Flagline</th><th>UNC WBGT forecast (UIL recommends)</th><th>Zelus WBGT</th><th>Perry Weather</th><th>Kestrel 5400 meter</th></tr>
+    <tr><td><b>Price</b></td><td><b>Free</b></td><td>Free</td><td>$49.99 to $299 per year (free tier ended Jun 2026)</td><td>About $3,500 per site per year</td><td>$549 to $629</td></tr>
+    <tr><td><b>Hardware</b></td><td>None (meter optional)</td><td>None</td><td>None</td><td>Required</td><td>Is the hardware</td></tr>
+    <tr><td><b>WBGT source</b></td><td>Two independent forecasts plus on-site readings</td><td>Forecast twice daily</td><td>Proprietary; read 2 to 3 C cool when hot (KSI 2025)</td><td>On-site sensor</td><td>Measured</td></tr>
+    <tr><td><b>Exact UIL Class 2 and 3 rules</b></td><td>Yes, tested</td><td>Plot bands; banner labels mismatch</td><td>Selectable</td><td>Yes</td><td>No</td></tr>
+    <tr><td><b>Sport outputs (football gear, band)</b></td><td>Yes</td><td>No</td><td>Partial</td><td>Partial</td><td>No</td></tr>
+    <tr><td><b>Practice workflow and timers</b></td><td>Yes</td><td>No</td><td>Partial</td><td>Alerts</td><td>No</td></tr>
+    <tr><td><b>Log of readings and decisions</b></td><td>Yes, free (CSV)</td><td>No</td><td>Paid tier</td><td>Paid tier</td><td>With kit</td></tr>
+    <tr><td><b>Air quality in the same view</b></td><td>Yes</td><td>No</td><td>Top tier</td><td>Add-on</td><td>No</td></tr>
+    <tr><td><b>Athlete check-ins and red flags</b></td><td>Yes</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+    <tr><td><b>Heat stroke protocol</b></td><td>Yes, with cooling timer</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+    <tr><td><b>Plain-language planning</b></td><td>Yes (TypeSafe Jev)</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+    <tr><td><b>English and Spanish</b></td><td>Yes</td><td>No</td><td>Unknown</td><td>Unknown</td><td>No</td></tr>
+  </table>
+  <div class="callout" style="margin-top: 10pt"><b>The gap.</b> Nothing free says: “At 4:30 pm on this field, under your state's rules, for this team in full pads, you may practice 2 hours with 4 breaks of 4 minutes; cooling tubs must be filled; your next reading is due at 5:00”, and then keeps the record by itself.</div>
+  <h2>Positioning</h2>
+  <p>For Texas high school coaches and band directors who must follow the new UIL heat rule without a trainer at every practice, Flagline is a free web app that turns the WBGT forecast and on-site readings into a practice plan, a recheck routine and a record. Unlike the free UNC forecast, Flagline runs the practice. Unlike paid systems, it needs no hardware and no budget.</p>
+  <p class="muted">Not built for professional or college programs with full sports medicine staffs, individual outdoor workers (OSHA and NIOSH tools exist), or anyone expecting a medical diagnosis.</p>
+  <div class="foot"><span>Flagline · What exists today</span><span>5</span></div>
+</section>
+
+<!-- 6. SOLUTION -->
+<section class="page">
+  <div class="kicker">04 · The Solution</div>
+  <h1>Five verbs: plan, prepare,<br>run, protect, prove</h1>
+  <div style="display: grid; gap: 8pt; margin-top: 4pt">
+    <div class="card" style="display: grid; grid-template-columns: 1.1in 1fr; gap: 10pt"><div><span class="chip g">Plan</span></div><div>The WBGT flag for every practice hour for 7 days, and plain-language questions like “Can we go full pads 4 to 6 tomorrow?” answered with a rules check and better time windows. <b>Quick Check</b> works for any place: UIL rules in Texas, Korey Stringer Institute categories elsewhere.</div></div>
+    <div class="card" style="display: grid; grid-template-columns: 1.1in 1fr; gap: 10pt"><div><span class="chip y">Prepare</span></div><div>Exactly what the rules require at the expected level: maximum length, breaks per hour, football gear, conditioning, cooling zone, water. Borderline readings (within 1 F of the next level) are flagged so the stricter preparations are ready.</div></div>
+    <div class="card" style="display: grid; grid-template-columns: 1.1in 1fr; gap: 10pt"><div><span class="chip o">Run</span></div><div><b>Practice Mode</b>: the pre-practice reading (keypad or a photo of the meter), a 30-minute recheck countdown, a break timer, time used against the level's limit, a cooling zone checklist, a thunder hold, and instant rule changes when the level rises. The coach and staff see the same practice, synced.</div></div>
+    <div class="card" style="display: grid; grid-template-columns: 1.1in 1fr; gap: 10pt"><div><span class="chip r">Protect</span></div><div>Athletes scan a QR code and say how they feel, in English or Spanish, with no account. Red flags (confusion, stopped sweating, fainting) alert the coach at once and open the <b>heat stroke protocol</b>: cool first, transport second, with a cooling timer and temperature log.</div></div>
+    <div class="card" style="display: grid; grid-template-columns: 1.1in 1fr; gap: 10pt"><div><span class="chip k">Prove</span></div><div>Every reading, level change, break and check-in is timestamped in a live log and exportable as CSV for the athletic director. Parents get a public team page.</div></div>
+  </div>
+  <h2>Principles we did not bend</h2>
+  <div class="grid2" style="gap: 6pt 18pt; font-size: 9.2pt">
+    <div><b>The human decides.</b> The app never says “safe”. It shows the flag and what the rules require.</div>
+    <div><b>Deterministic where it matters.</b> Heat math and rules are tested code; AI never decides a level.</div>
+    <div><b>Honest numbers.</b> Every value shows its source and whether it is a forecast or a measurement.</div>
+    <div><b>The measured reading wins.</b> Forecasts plan; on-site readings drive the live rules.</div>
+    <div><b>Five seconds on the sideline.</b> Every live action is one or two taps, with 44 px targets.</div>
+    <div><b>Color is never the only signal.</b> Every flag has an icon, a name and a value.</div>
+    <div><b>Bilingual from day one.</b> English and Spanish everywhere, including check-ins.</div>
+    <div><b>Privacy by default.</b> No athlete names needed; check-ins can be anonymous.</div>
+  </div>
+  <div class="foot"><span>Flagline · The solution</span><span>6</span></div>
+</section>
+
+<!-- 7. TOUR 1 -->
+<section class="page tour">
+  <div class="kicker">05 · Product Tour · Plan</div>
+  <h1>Know the flag before<br>you reach the field</h1>
+  <div class="shot"><img src="img/01-home.jpg" alt="Flagline home page"></div>
+  <p class="cap"><b>Home.</b> The live Austin flag, the promise in one line, and three ways in: Check Conditions, Set Up Your Team, Try The Demo Team. Built on official rules and open data (UIL, NFHS, NWS, Open-Meteo, KSI, EPA AirNow).</p>
+  <div class="shot" style="margin-top: 12pt"><img src="img/02-quick-check.jpg" alt="Quick Check"></div>
+  <p class="cap"><b>Quick Check.</b> Pick a place and an activity. Flagline shows the flag now, the next 24 hours and exactly what the rules require, with air quality, thunder chance and the sources behind the number. It suggests the right UIL class for the location, and uses KSI categories outside Texas.</p>
+  <div class="foot"><span>Flagline · Product tour</span><span>7</span></div>
+</section>
+
+<!-- 8. TOUR 2 -->
+<section class="page tour">
+  <div class="kicker">05 · Product Tour · Plan</div>
+  <h1>Ask in plain words.<br>The rules do the math.</h1>
+  <div class="shot"><img src="img/03-coach-dashboard.jpg" alt="Coach dashboard"></div>
+  <p class="cap"><b>Coach dashboard.</b> A team gets a private coach link (no accounts). Today's flag and requirements, a one-tap Start Practice, and a parent page.</p>
+  <div class="shot" style="margin-top: 12pt"><img src="img/04-ask-flagline.jpg" alt="Ask Flagline and the planner"></div>
+  <p class="cap"><b>Ask Flagline and the 7-day planner.</b> “Can we go full pads 4 to 6 tomorrow?” TypeSafe Jev reads the intent, gear and times; the deterministic rules engine checks the plan hour by hour and suggests better windows. The planner shows every practice hour for a week.</p>
+  <div class="foot"><span>Flagline · Product tour</span><span>8</span></div>
+</section>
+
+<!-- 9. TOUR 3 -->
+<section class="page tour">
+  <div class="kicker">05 · Product Tour · Run</div>
+  <h1>A reading in five seconds,<br>even from a photo</h1>
+  <div class="shot"><img src="img/05-pre-practice-reading.jpg" alt="Pre-practice reading"></div>
+  <p class="cap"><b>Pre-practice reading.</b> UIL requires a reading within 15 minutes before practice. One tap to log a meter value or use the forecast, with a QR code athletes can scan at the water station.</p>
+  <div class="shot" style="margin-top: 12pt"><img src="img/06-meter-photo.jpg" alt="Meter photo reading"></div>
+  <p class="cap"><b>Meter photo.</b> A vision model transcribes the display, Jev picks which number is WBGT (even when the screen shows several), code checks the range and warns when it is far from the forecast. The coach always confirms before saving.</p>
+  <div class="foot"><span>Flagline · Product tour</span><span>9</span></div>
+</section>
+
+<!-- 10. TOUR 4 -->
+<section class="page tour">
+  <div class="kicker">05 · Product Tour · Run and Protect</div>
+  <h1>The routine runs itself.<br>Red flags cannot wait.</h1>
+  <div class="shot"><img src="img/07-live-practice.jpg" alt="Live practice"></div>
+  <p class="cap"><b>Practice Mode.</b> Orange flag at 87.6 F: two hours maximum, four breaks of four minutes every hour, cooling zone required. A countdown to the next reading, a break timer, time used against the limit, a thunder hold and a live log.</p>
+  <div class="shot" style="margin-top: 12pt"><img src="img/08-red-flag-alert.jpg" alt="Red flag alert"></div>
+  <p class="cap"><b>Red flag alert.</b> When an athlete reports a red flag, the coach's screen interrupts with the message and one tap to the emergency protocol.</p>
+  <div class="foot"><span>Flagline · Product tour</span><span>10</span></div>
+</section>
+
+<!-- 11. TOUR 5 -->
+<section class="page">
+  <div class="kicker">05 · Product Tour · Protect and Prove</div>
+  <h1>Athletes get a voice.<br>Coaches get the order right.</h1>
+  <div class="shot"><img src="img/09-athlete-checkin.jpg" alt="Athlete check-in in Spanish"></div>
+  <p class="cap"><b>Athlete check-in.</b> No account. Tap symptoms or type, in English or Spanish. “Me siento confundido y ya no estoy sudando” (I feel confused and I have stopped sweating) routes to Emergency in seconds, caught both by our keyword rules and by Jev.</p>
+  <div class="grid2" style="margin-top: 10pt">
+    <div><div class="shot"><img src="img/10-checkin-queue.jpg" alt="Check-in queue"></div><p class="cap"><b>Queue.</b> Open emergencies first, with plain-language reasons for each flag.</p></div>
+    <div><div class="shot"><img src="img/11-heat-stroke-protocol.jpg" alt="Heat stroke protocol"></div><p class="cap"><b>Protocol.</b> Cool first, transport second: a cooling timer, Call 911, temperature log, EMS times.</p></div>
+  </div>
+  <div class="foot"><span>Flagline · Product tour</span><span>11</span></div>
+</section>
+
+<!-- 12. HOW IT WORKS -->
+<section class="page">
+  <div class="kicker">06 · How It Works</div>
+  <h1>Deterministic core,<br>AI only at the edges</h1>
+  <div class="arch" style="margin-top: 6pt">
+    <div class="col">
+      <div class="flow">INPUTS</div>
+      <div class="box"><b>NWS gridpoint API</b>Official WBGT forecast, heat risk, thunder probability. Keyless.</div>
+      <div class="box"><b>Open-Meteo</b>Hourly weather with instant radiation for our model; air quality; place search. Keyless.</div>
+      <div class="box"><b>OpenStreetMap Nominatim</b>Names the place for a GPS fix (server side, coordinates rounded).</div>
+      <div class="box"><b>Coach and athletes</b>Meter readings and photos, plain-language plans, check-ins.</div>
+    </div>
+    <div class="col">
+      <div class="flow">FLAGLINE (NEXT.JS ON VERCEL)</div>
+      <div class="box dark"><b>Heat engine · lib/heat</b>Liljegren WBGT with NOAA solar geometry, sun and shade. Planning WBGT = max(NWS, model).</div>
+      <div class="box dark"><b>Rules engine · lib/rules</b>UIL Class 2 and 3, KSI categories, AQI presets, lightning hold, session limits, plan evaluation. Versioned JSON with sources.</div>
+      <div class="box dark"><b>Practice state · lib/practice</b>A pure reducer for readings, breaks, levels, thunder, cooling; CSV log.</div>
+      <div class="box ai"><b>AI layer · lib/ai</b>TypeSafe Jev for typed judgments (triage, plan parsing, meter value). Vision model for meter digits only. Confidence gates and deterministic backstops.</div>
+      <div class="box"><b>Neon Postgres · Drizzle</b>Teams, practices (synced state), check-ins. Capability links; only token hashes stored.</div>
+    </div>
+    <div class="col">
+      <div class="flow">OUTPUTS</div>
+      <div class="box"><b>Quick Check</b>Flag now, 24 hours, requirements, AQI, thunder, sources.</div>
+      <div class="box"><b>Coach dashboard</b>Ask Flagline, 7-day planner, start practice.</div>
+      <div class="box"><b>Practice Mode</b>Timers, live rules, log, QR check-in, synced.</div>
+      <div class="box"><b>Check-in and alert</b>Athlete form, routed queue, red-flag interrupt.</div>
+      <div class="box"><b>Emergency</b>Heat stroke protocol with cooling timer.</div>
+      <div class="box"><b>Parent page</b>Public team status, no personal data.</div>
+    </div>
+  </div>
+  <h2>Stack</h2>
+  <p>Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4 · pure shadcn/ui (base-nova on Base UI) · Zod 4 · next-intl (English and Spanish) · Recharts · chrono-node · Drizzle ORM with Neon Postgres · TypeSafe Jev via @typesafe-ai/sdk · OpenRouter vision (Kimi K3) · Vitest · Vercel hosting behind Cloudflare · pnpm.</p>
+  <h2>Design choices that matter</h2>
+  <ul>
+    <li><b>No accounts yet, on purpose.</b> A coach link (only its SHA-256 hash is stored), a check-in token and a public slug. Nothing personal is required to use it.</li>
+    <li><b>Two independent forecasts.</b> The flag always uses the higher of NWS and our model; outside the US, the model runs alone and says so.</li>
+    <li><b>Server-only AI keys</b>, rate limits on every public endpoint, Zod validation at every boundary, security headers.</li>
+  </ul>
+  <div class="foot"><span>Flagline · How it works</span><span>12</span></div>
+</section>
+
+<!-- 13. ENGINE AND RULES -->
+<section class="page">
+  <div class="kicker">07 · The Heat Engine And The Rules</div>
+  <h1>Real physics, the exact<br>UIL table</h1>
+  <h2>WBGT, computed</h2>
+  <p>Outdoor WBGT = <span class="mono">0.7 × natural wet bulb + 0.2 × globe + 0.1 × air</span>. We ported the Liljegren et al. (2008) model from ECMWF's open-source thermofeel library to TypeScript, including the globe and natural wet bulb solvers, 2 m wind adjustment and NOAA solar geometry. It matches <b>288 reference cases</b> generated from the original implementation. On a late-September Austin afternoon: air 97 to 99 F, heat index 100 to 107 F, WBGT 85 to 88 F.</p>
+  <h2>UIL WBGT activity guidelines, 2026-27</h2>
+  <table>
+    <tr><th style="width: 12%">Level</th><th style="width: 13%">Class 3 (most of Texas)</th><th style="width: 13%">Class 2 (Panhandle, South Plains)</th><th>What the rules require</th></tr>
+    <tr><td><span class="chip g">Green</span></td><td class="mono">&lt; 82.0</td><td class="mono">&lt; 79.7</td><td>Normal activities; at least 3 rest breaks each hour, 3 minutes each</td></tr>
+    <tr><td><span class="chip y">Yellow</span></td><td class="mono">82.0 to 86.9</td><td class="mono">79.7 to 84.6</td><td>Discretion for intense or prolonged exercise; 3 breaks of 4 minutes each hour; <b>cooling zone required</b></td></tr>
+    <tr><td><span class="chip o">Orange</span></td><td class="mono">87.0 to 90.0</td><td class="mono">84.7 to 87.6</td><td><b>2 hours maximum</b>; football in helmet, shoulder pads and shorts (pants allowed if reached mid-practice); 4 breaks of 4 minutes each hour</td></tr>
+    <tr><td><span class="chip r">Red</span></td><td class="mono">90.1 to 92.0</td><td class="mono">87.7 to 89.7</td><td><b>1 hour maximum</b>; football: no protective equipment and no conditioning; 20 minutes of breaks across the hour</td></tr>
+    <tr><td><span class="chip k">Black</span></td><td class="mono">≥ 92.1</td><td class="mono">≥ 89.8</td><td><b>No outdoor workouts</b>; delay until cooler</td></tr>
+  </table>
+  <h2>Timing rules we enforce</h2>
+  <ul>
+    <li>A reading within 15 minutes before practice and every 30 minutes during it (with a 2-minute grace).</li>
+    <li>When conditions worsen, everyone moves to the stricter level at once; when they improve, practice is not extended.</li>
+    <li>Water is never denied; breaks mean unlimited hydration and no activity.</li>
+    <li>Thunder or lightning starts a 30-minute hold that resets with each strike (UIL adopts NFHS).</li>
+    <li>Air quality presets: modify at AQI 101 to 150, cancel youth activity at 151+, with a stricter youth option.</li>
+  </ul>
+  <h2>Outside Texas</h2>
+  <p>Korey Stringer Institute regional categories (Grundstein et al. 2015) apply anywhere else, with Category 1 as the most protective default.</p>
+  <div class="foot"><span>Flagline · Engine and rules</span><span>13</span></div>
+</section>
+
+<!-- 14. AI -->
+<section class="page">
+  <div class="kicker">08 · The AI Layer</div>
+  <h1>Typed judgments,<br>not chatbot text</h1>
+  <p class="lead">Instead of prompting a chatbot and parsing its words, Flagline asks <b>TypeSafe Jev</b> typed questions (Choice, Noul probabilities and Scores) with confidence values our code can gate on. AI handles only what code cannot: understanding people and photos.</p>
+  <div class="grid3">
+    <div class="card"><h3>Check-in triage</h3><p>Jev screens free text for 8 red flags (confusion, collapse, vomiting, stopped sweating, severe headache, seizure, breathing, chest pain) plus severity and category, in one request.</p><p class="muted">Routing is recall-first and deterministic: any tapped red flag, an English or Spanish keyword, a red-flag probability ≥ 0.25, severity ≥ 3.0 or “possible heat stroke” goes to Emergency. AI can raise a flag, never clear one.</p></div>
+    <div class="card"><h3>Ask Flagline</h3><p>A date parser proposes start times and lengths (“4 to 6 tomorrow” means 4 PM; “about 2 hours” is a length). Jev picks intent, gear, conditioning and the right candidate in one request.</p><p class="muted">Below 0.6 confidence the app asks instead of guessing. The rules engine then evaluates the plan hour by hour and finds better windows.</p></div>
+    <div class="card"><h3>Meter photo</h3><p>A vision model (Kimi K3 via OpenRouter) only transcribes the numbers and labels on the display. Jev picks which number is WBGT.</p><p class="muted">Code converts Celsius, rejects values outside 40 to 120 F, warns when more than 8 F from the forecast, and the coach confirms. Photos are read once and never stored.</p></div>
+  </div>
+  <h2>Measured results</h2>
+  <table>
+    <tr><th>Eval</th><th>Result</th><th>What it means</th></tr>
+    <tr><td>Red-flag triage, 25 messages (English and Spanish)</td><td><b>25/25 routed to Emergency</b></td><td>100% recall, the bar we set; 8 of them were caught only by Jev, not by keywords</td></tr>
+    <tr><td>Routine messages, 8</td><td><b>0/8 false alarms</b></td><td>Recall-first without crying wolf on cramps or tiredness</td></tr>
+    <tr><td>Meter photos, 4 screens</td><td><b>4/4 read correctly</b></td><td>Including several readings on one screen, a Celsius display and a blurred, tilted dark screen</td></tr>
+    <tr><td>Ask Flagline parsing</td><td>Unit tested edge cases</td><td>PM inference, duration phrases, same-day times, Spanish dates, intent settled by a stated time</td></tr>
+  </table>
+  <div class="callout"><b>Safety contract.</b> AI never sets a flag level, never sets a practice limit, and never tells anyone an athlete is fine. Every AI-derived value is shown and editable before it is used.</div>
+  <div class="foot"><span>Flagline · AI layer</span><span>14</span></div>
+</section>
+
+<!-- 15. SAFETY -->
+<section class="page">
+  <div class="kicker">09 · Safety, Privacy, Accessibility</div>
+  <h1>Built for the worst<br>afternoon of the season</h1>
+  <h2>Hazards and controls</h2>
+  <table>
+    <tr><th style="width: 30%">Hazard</th><th>Controls</th></tr>
+    <tr><td>App shows a lower level than reality</td><td>Higher of two forecasts; borderline flag within 1 F; forecast labeled planning only; on-site reading prompted before and every 30 minutes; the measured reading drives the rules</td></tr>
+    <tr><td>A rule encoded wrongly</td><td>Rules are versioned data with source links; conformance tests on every boundary; a threshold change needs a source and a passing test</td></tr>
+    <tr><td>Missed recheck</td><td>Big countdown, overdue state, synced practice for staff, logged</td></tr>
+    <tr><td>An athlete's red flag not escalated</td><td>Tapped red flags bypass AI; keyword backstop in two languages; recall-first thresholds; 100% recall eval; the app never clears a flag</td></tr>
+    <tr><td>Transport before cooling</td><td>The protocol leads with cooling; Call 911 after cooling starts; large type; bilingual</td></tr>
+    <tr><td>Over-trust</td><td>Never says “safe”; the coach confirms; copy frames the app as support for school staff</td></tr>
+    <tr><td>Misread meter photo</td><td>Range and forecast checks; the coach confirms; manual entry always available</td></tr>
+  </table>
+  <div class="grid2" style="margin-top: 12pt">
+    <div class="card"><h3>Privacy</h3><ul><li>No athlete names required; jersey numbers or initials are optional; check-ins can be anonymous.</li><li>No accounts; coach links stored only as hashes.</li><li>Meter photos processed in memory and never stored.</li><li>Public team pages hold no personal data.</li><li>All demo data is fictional (Pecan Creek High School).</li><li>AI keys stay on the server.</li></ul></div>
+    <div class="card"><h3>Accessibility</h3><ul><li>Every flag is color plus icon plus name plus value.</li><li>44 px targets in Practice Mode; one-handed layouts.</li><li>Light, dark and a sunlight theme for glare.</li><li>Labels match visible text (WCAG 2.5.3); selected states never rely on shade alone.</li><li>English and Spanish on every screen, enforced by a test that checks every message key.</li></ul></div>
+  </div>
+  <p class="muted" style="margin-top: 10pt">Flagline is not a medical device and does not diagnose illness. It does not replace an athletic trainer, an on-site WBGT instrument or emergency services. Decisions remain with school staff under the UIL heat plan and the school's emergency action plan.</p>
+  <div class="foot"><span>Flagline · Safety</span><span>15</span></div>
+</section>
+
+<!-- 16. QUALITY -->
+<section class="page">
+  <div class="kicker">10 · Quality And Evidence</div>
+  <h1>Tested like it matters</h1>
+  <div class="grid4">
+    <div class="stat"><div class="n">442</div><div class="l">automated tests passing across 11 test files</div></div>
+    <div class="stat"><div class="n">288</div><div class="l">WBGT reference cases matched (thermofeel)</div></div>
+    <div class="stat"><div class="n">100%</div><div class="l">UIL conformance suite on every level boundary</div></div>
+    <div class="stat"><div class="n">462</div><div class="l">messages in each language, parity checked</div></div>
+  </div>
+  <h2>What the tests cover</h2>
+  <table>
+    <tr><th style="width: 28%">Area</th><th>Checks</th></tr>
+    <tr><td>Heat physics</td><td>Globe and natural wet bulb solvers, 2 m wind, solar zenith, sun and shade WBGT against the reference fixture</td></tr>
+    <tr><td>UIL and KSI rules</td><td>Every threshold edge for Class 2 and 3, KSI categories, requirements by level and sport, mid-practice gear, borderline detection</td></tr>
+    <tr><td>Conditions</td><td>NWS duration parsing and unit conversion, Open-Meteo parsing, two-source combination, reverse geocoding</td></tr>
+    <tr><td>Practice state</td><td>Readings, starts, breaks per hour, level changes, thunder hold, cooling, end, CSV log</td></tr>
+    <tr><td>Planning</td><td>Plan evaluation hour by hour, best windows, date and duration parsing, intent gate</td></tr>
+    <tr><td>AI routing</td><td>Triage thresholds, keyword lists in English and Spanish, third-party distress, meter transcription and selection</td></tr>
+    <tr><td>Check-in queue</td><td>Emergencies first, newest first within a level, readable reasons</td></tr>
+    <tr><td>Messages</td><td>English and Spanish keys match; every key the app asks for exists; no em or en dashes in copy</td></tr>
+  </table>
+  <h2>Live evals (run against the real models)</h2>
+  <p><span class="mono">pnpm eval:triage</span> · <span class="mono">pnpm eval:ask</span> · <span class="mono">pnpm eval:meter</span>. Results are on page 14. Rule thresholds can only change with a source and a passing conformance test.</p>
+  <h2>Engineering hygiene</h2>
+  <ul>
+    <li>TypeScript strict, ESLint and a production build checked before every deploy.</li>
+    <li>Zod validation at every API and Server Action boundary; rate limits on public endpoints.</li>
+    <li>Security headers (camera and geolocation limited to the app itself); secrets only in environment variables.</li>
+    <li>Pure shadcn/ui components from the default registry; no other UI libraries.</li>
+  </ul>
+  <div class="foot"><span>Flagline · Quality</span><span>16</span></div>
+</section>
+
+<!-- 17. IMPACT -->
+<section class="page">
+  <div class="kicker">11 · Impact, Feasibility, Adoption</div>
+  <h1>Free to run, easy to adopt,<br>ready to spread</h1>
+  <h2>Who benefits first</h2>
+  <p>Every UIL member high school and junior high with outdoor athletics or a marching band, starting with the schools that have no trainer at every practice and no hardware budget. Nationally, 8.27 million high school athletes and the 17+ states that already require WBGT-guided practices.</p>
+  <h2>How we will measure impact</h2>
+  <table>
+    <tr><th style="width: 30%">Outcome</th><th style="width: 34%">Metric</th><th>How</th></tr>
+    <tr><td>Faster, correct planning</td><td>Time from opening to the practice plan (target under 10 s)</td><td>Privacy-preserving product analytics</td></tr>
+    <tr><td>Compliance</td><td>Rechecks on time; modifications confirmed</td><td>Practice logs</td></tr>
+    <tr><td>Earlier symptom reporting</td><td>Check-ins per practice; time to adult response</td><td>Anonymous check-in records</td></tr>
+    <tr><td>Fewer lost practices</td><td>Practices moved instead of cancelled</td><td>Planner and log</td></tr>
+    <tr><td>Safety</td><td>Cooling started within 10 minutes in any incident</td><td>Incident records, if any</td></tr>
+  </table>
+  <p class="muted">Long term: fewer heat illnesses and zero heat deaths in participating programs. That cannot be shown in two weeks, and we say so.</p>
+  <h2>Operating cost at pilot scale (about 50 schools)</h2>
+  <div class="grid4">
+    <div class="stat"><div class="n">$0</div><div class="l">weather and air data (NWS public domain, Open-Meteo, keyless)</div></div>
+    <div class="stat"><div class="n">$0</div><div class="l">hosting and database on free tiers (Vercel, Neon)</div></div>
+    <div class="stat"><div class="n">&lt; $1</div><div class="l">per month for Jev judgments</div></div>
+    <div class="stat"><div class="n">&lt; $30</div><div class="l">per month all in, including meter photos</div></div>
+  </div>
+  <p style="margin-top: 8pt">Forecasts are cached by grid cell and coordinates, so every team at a school shares the same calls.</p>
+  <h2>Adoption path</h2>
+  <ol>
+    <li><b>Pilot</b> with 3 to 5 Austin-area schools this fall, measured against the metrics above.</li>
+    <li><b>Channels</b>: Texas High School Coaches Association, Texas Music Educators Association for band, district athletic directors and trainer networks. UIL already points coaches to internet-based WBGT sources.</li>
+    <li><b>Model</b>: free forever for schools; any later district tier never gates a safety feature.</li>
+    <li><b>Beyond Texas</b>: each new state is a rules data file plus conformance tests, not a rewrite.</li>
+    <li><b>Open source</b> (MIT) so districts can self-host and audit the rules.</li>
+  </ol>
+  <div class="foot"><span>Flagline · Impact</span><span>17</span></div>
+</section>
+
+<!-- 18. JUDGING -->
+<section class="page">
+  <div class="kicker">12 · Judging Criteria And Theme Fit</div>
+  <h1>How Flagline answers<br>the four criteria</h1>
+  <div class="grid2">
+    <div class="card"><h3>Impact</h3><p>A life-safety problem with official, current evidence; a brand-new mandate in the judges' own state; a named audience (every Texas school with outdoor athletics or band); equity for schools without trainers or budgets; a nation-wide path.</p></div>
+    <div class="card"><h3>Feasibility</h3><p>Already live on free infrastructure with free public data, no hardware and no accounts. Under $30 per month for dozens of schools. A clear pilot and adoption plan; rules for new states are data.</p></div>
+    <div class="card"><h3>User experience</h3><p>One glanceable flag with text, not color alone; a big recheck timer; a five-second reading by keypad or photo; plain-language planning; English and Spanish; sunlight mode; 44 px targets; the athlete form needs no account.</p></div>
+    <div class="card"><h3>Technical craft</h3><p>A ported physics model with 288 reference cases; a typed, tested rules engine; two-source uncertainty; confidence-gated typed AI with deterministic backstops; synced practices; 442 tests and live evals.</p></div>
+  </div>
+  <h2>The theme: community, county, state, nation</h2>
+  <table>
+    <tr><th style="width: 18%">Scale</th><th>How Flagline serves it</th></tr>
+    <tr><td><b>Community</b></td><td>The teams, bands and families of Austin, starting with the fictional Pecan Creek High School demo team</td></tr>
+    <tr><td><b>County</b></td><td>Travis County schools, where late-September afternoons still reach orange and red WBGT</td></tr>
+    <tr><td><b>State</b></td><td>Texas made WBGT monitoring mandatory for every outdoor practice and marching band rehearsal from August 1, 2026; Flagline implements the exact UIL rule, Class 2 and Class 3</td></tr>
+    <tr><td><b>Nation</b></td><td>At least 17 other states require WBGT-guided practices; Quick Check already works anywhere with KSI categories, and new states are a data task</td></tr>
+  </table>
+  <div class="callout" style="margin-top: 12pt">Texas made heat safety mandatory for every outdoor practice this season. Flagline helps every school in our community, county and state follow it, free, so no student athlete dies of a preventable heat stroke.</div>
+  <div class="foot"><span>Flagline · Judging</span><span>18</span></div>
+</section>
+
+<!-- 19. BUILT / NEXT -->
+<section class="page">
+  <div class="kicker">13 · Built, Next, And The Build Log</div>
+  <h1>What ships today,<br>and what comes next</h1>
+  <div class="grid2">
+    <div class="card"><h3>Built and live</h3>
+      <div class="tick">Quick Check worldwide, with GPS fix accuracy and place names</div>
+      <div class="tick">Two-source WBGT (NWS plus Liljegren model) with ranges</div>
+      <div class="tick">UIL Class 2 and 3 plus KSI categories; AQI; thunder hold</div>
+      <div class="tick">Teams with private coach links and parent pages</div>
+      <div class="tick">Ask Flagline with Jev and the 7-day planner</div>
+      <div class="tick">Practice Mode: timers, breaks, live rules, cooling checklist, log, CSV</div>
+      <div class="tick">Synced practices for the coaching staff</div>
+      <div class="tick">Meter photo reading (vision plus Jev plus checks)</div>
+      <div class="tick">Athlete check-ins in two languages with Jev triage</div>
+      <div class="tick">Red-flag alert, sorted queue, readable reasons</div>
+      <div class="tick">Heat stroke protocol with cooling timer</div>
+      <div class="tick">Light, dark and sunlight themes; English and Spanish</div>
+    </div>
+    <div class="card"><h3>Next</h3>
+      <div class="next">A signed, bilingual PDF practice log for athletic directors</div>
+      <div class="next">Push notifications for rechecks and red-flag check-ins</div>
+      <div class="next">Offline Practice Mode for fields with weak signal</div>
+      <div class="next">School accounts with roles (owner, coach, trainer, viewer)</div>
+      <div class="next">Football acclimatization tracking per athlete</div>
+      <div class="next">AI-assisted import of other states' heat policies</div>
+      <div class="next">Forecast calibration from logged on-site readings</div>
+      <div class="next">Automated lightning data with the 10-mile rule</div>
+    </div>
+  </div>
+  <h2>Build log</h2>
+  <table>
+    <tr><th style="width: 18%">Date</th><th>Milestone</th></tr>
+    <tr><td>Sep 25</td><td>Research and planning documents only (challenge, problem, solution, build spec, sources). No application code before the theme reveal.</td></tr>
+    <tr><td>Sep 27</td><td>Theme revealed; Flagline confirmed by our theme-fit protocol (Jev rated it 3.77 of 4, the highest of five candidates).</td></tr>
+    <tr><td>Sep 28</td><td>Scaffold (Next.js 16, shadcn/ui base-nova); WBGT physics, UIL rules engine, two-source conditions; Home, Quick Check, Practice Mode, Emergency.</td></tr>
+    <tr><td>Sep 28 to 29</td><td>Teams, synced Practice Mode, athlete check-ins with Jev triage, Ask Flagline; deployed to production with a custom domain.</td></tr>
+    <tr><td>Sep 30</td><td>Meter photo reading; worldwide location with reverse geocoding and fix accuracy.</td></tr>
+    <tr><td>Oct 1</td><td>Polish from end-to-end testing: queue ordering, readable flag reasons, accessibility fixes, message-key test; submission media and demo video.</td></tr>
+  </table>
+  <div class="foot"><span>Flagline · Built and next</span><span>19</span></div>
+</section>
+
+<!-- 20. CREDITS AND SOURCES -->
+<section class="page">
+  <div class="kicker">14 · Credits, AI Disclosure, Sources</div>
+  <h1>Open about how<br>it was made</h1>
+  <div class="grid2">
+    <div class="card"><h3>AI disclosure</h3><p>Claude Code assisted with writing code and documentation. In the product, TypeSafe Jev makes typed judgments (triage, plan parsing, meter value selection) and Kimi K3 via OpenRouter transcribes meter photos. The demo video was assembled with OpenMontage and Remotion, narrated by a synthetic voice (Microsoft en-KE Chilemba).</p></div>
+    <div class="card"><h3>Attribution and license</h3><p>WBGT method: Liljegren et al. (2008), ported from ECMWF thermofeel (Apache-2.0). Weather: National Weather Service (public domain) and Open-Meteo (CC BY 4.0). Place names: OpenStreetMap contributors. UI: shadcn/ui, lucide icons, Geist fonts. Music: Pixabay Content License. Flagline is MIT licensed.</p></div>
+  </div>
+  <p class="muted" style="margin-top: 8pt">Planning documents were written before the theme reveal; all application code was written during the event. Demo data is fictional; no real minors' data appears anywhere.</p>
+  <h2>Sources</h2>
+  <ol class="src two-col">
+    <li>UIL, Heat Stress and Athletic Participation (required WBGT plan, 2026-27). uiltexas.org/health/info/heat-stress-and-athletic-participation</li>
+    <li>NFHS SMAC Task Force, Preventing Exertional Heat Stroke in High School Football Linemen, June 2026 (hosted by UIL).</li>
+    <li>CDC, Heat Illness Among High School Athletes, MMWR 59(32), 2010.</li>
+    <li>Stearns et al., Exertional heat stroke deaths in US secondary school sports, Sports Health, 2025.</li>
+    <li>Korey Stringer Institute, High School Sports Safety Policies: Texas, 2025-26.</li>
+    <li>Korey Stringer Institute, state heat policy tracker (nearly 200 policies since 2017).</li>
+    <li>Houston Public Media, UIL heat safety rule coverage, Aug 3, 2026.</li>
+    <li>TexasHSFootball, coaches on the WBGT requirement, Jul 20, 2026.</li>
+    <li>NFHS, High School Athletics Participation Survey 2024-25 (8,266,244 participants).</li>
+    <li>Grundstein and Merchant, exertional heat illness in marching band, 2021, doi:10.1007/s00484-021-02183-0.</li>
+    <li>Grundstein et al., app versus on-site WBGT, GeoHealth 2025, doi:10.1029/2025GH001347.</li>
+    <li>Grundstein et al., regional WBGT categories, 2015.</li>
+    <li>Liljegren et al., Modeling the wet bulb globe temperature using standard meteorological measurements, 2008.</li>
+    <li>ECMWF thermofeel, github.com/ecmwf/thermofeel.</li>
+    <li>UNC Convergence WBGT forecast tool, convergence.unc.edu/tools/wbgt.</li>
+    <li>Perry Weather, schools and districts; Tulsa Public Schools board Q&amp;A, Feb 2026.</li>
+    <li>Aspen Institute Project Play, youth sports and climate survey, 2024.</li>
+    <li>CDC and NWS HeatRisk launch, April 2024.</li>
+    <li>FOX 4 Dallas, Lancaster player heat stroke death, Aug 2025; FOX 7 Austin, Bowie High School heat stroke, 2023.</li>
+    <li>KCRG, university band member collapse, Sep 2026.</li>
+    <li>NFHS and Oregon Health Authority, youth air quality guidance.</li>
+    <li>National Weather Service API, api.weather.gov; Open-Meteo, open-meteo.com.</li>
+  </ol>
+  <div style="position: absolute; left: 0.7in; right: 0.7in; bottom: 0.8in; display: flex; align-items: center; gap: 12pt">
+    <div class="mark" style="width: 30pt; height: 30pt; border-radius: 8pt"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 17pt; height: 17pt"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/></svg></div>
+    <div><b>Flagline</b> · heat rules, handled on the sideline · <span class="mono">flagline.codewitheugene.top</span></div>
+  </div>
+  <div class="foot"><span>Flagline · Credits and sources</span><span>20</span></div>
+</section>
+
+</body>
+</html>
