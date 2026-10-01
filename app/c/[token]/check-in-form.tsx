@@ -1,6 +1,6 @@
 "use client"
 
-import { HeartPulse, Send, Siren, ThumbsUp } from "lucide-react"
+import { Check, HeartPulse, Send, Siren, ThumbsUp } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
 
@@ -79,10 +79,12 @@ export function CheckInForm({ token }: { token: string }) {
                 key={s}
                 variant="outline"
                 size="lg"
-                className="h-12 justify-start whitespace-normal text-left"
+                className="h-12 justify-start whitespace-normal text-left aria-pressed:border-foreground aria-pressed:font-medium aria-pressed:ring-1 aria-pressed:ring-foreground"
                 pressed={symptoms.includes(s)}
                 onPressedChange={(p) => setSymptoms((prev) => (p ? [...prev, s] : prev.filter((x) => x !== s)))}
               >
+                {/* Selected is shown by an icon and a border, not by shade alone. */}
+                {symptoms.includes(s) && <Check data-icon="inline-start" aria-hidden />}
                 {t(`sym_${s}`)}
               </Toggle>
             ))}
