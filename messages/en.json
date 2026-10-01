@@ -472,7 +472,21 @@
     "alertTitle": "Red Flag Check-In",
     "alertOpen": "Open Emergency Protocol",
     "alertDismiss": "I Am On It",
-    "aiFlags": "Why flagged: {reasons}"
+    "aiFlags": "Why flagged: {reasons}",
+    "reasonTapped": "tapped {list}",
+    "reasonKeyword": "warning words in the message",
+    "reasonAi": "Jev noticed {list}",
+    "ai_confusion": "confusion",
+    "ai_collapse_or_fainting": "fainting or collapse",
+    "ai_vomiting": "vomiting",
+    "ai_hot_dry_skin": "stopped sweating or hot, dry skin",
+    "ai_severe_headache": "a severe headache",
+    "ai_seizure_or_unresponsive": "a seizure or no response",
+    "ai_breathing_difficulty": "trouble breathing",
+    "ai_chest_pain": "chest pain",
+    "ai_third_party_distress": "a teammate in distress",
+    "ai_severity": "a serious report",
+    "ai_category": "signs of possible heat stroke"
   },
   "teamPage": {
     "title": "Practice Status",

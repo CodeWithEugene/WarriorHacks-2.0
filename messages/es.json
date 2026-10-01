@@ -472,7 +472,21 @@
     "alertTitle": "Reporte Con Señal De Alarma",
     "alertOpen": "Abrir Protocolo De Emergencia",
     "alertDismiss": "Voy En Camino",
-    "aiFlags": "Motivo: {reasons}"
+    "aiFlags": "Motivo: {reasons}",
+    "reasonTapped": "marcó {list}",
+    "reasonKeyword": "palabras de alerta en el mensaje",
+    "reasonAi": "Jev notó {list}",
+    "ai_confusion": "confusión",
+    "ai_collapse_or_fainting": "desmayo o colapso",
+    "ai_vomiting": "vómito",
+    "ai_hot_dry_skin": "dejó de sudar o piel caliente y seca",
+    "ai_severe_headache": "un dolor de cabeza fuerte",
+    "ai_seizure_or_unresponsive": "una convulsión o falta de respuesta",
+    "ai_breathing_difficulty": "dificultad para respirar",
+    "ai_chest_pain": "dolor de pecho",
+    "ai_third_party_distress": "un compañero en peligro",
+    "ai_severity": "un reporte serio",
+    "ai_category": "señales de posible golpe de calor"
   },
   "teamPage": {
     "title": "Estado De La Práctica",

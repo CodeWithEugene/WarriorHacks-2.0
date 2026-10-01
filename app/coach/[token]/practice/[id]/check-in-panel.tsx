@@ -23,6 +23,7 @@ import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemTitle }
 import type { ApiEnvelope } from "@/lib/api"
 import type { CheckIn } from "@/lib/db/schema"
 import { formatTime } from "@/lib/format"
+import { groupReasons, sortQueue } from "@/lib/practice/queue"
 import { cn } from "@/lib/utils"
 
 const POLL_MS = 10_000
@@ -64,6 +65,17 @@ export function CheckInPanel({ coachToken, practiceId, checkInUrl, qrDataUrl }: 
   }
 
   const symptomLabel = (s: string) => tc(`sym_${s}` as "sym_dizzy")
+  const listFormat = new Intl.ListFormat(locale, { type: "conjunction" })
+  const reasonText = (reasons: unknown) => {
+    const g = groupReasons(reasons)
+    const parts = [
+      g.tapped.length > 0 ? t("reasonTapped", { list: listFormat.format(g.tapped.map((s) => symptomLabel(s).toLowerCase())) }) : null,
+      g.keyword ? t("reasonKeyword") : null,
+      g.ai.length > 0 ? t("reasonAi", { list: listFormat.format(g.ai.map((k) => t(`ai_${k}` as "ai_confusion"))) }) : null,
+    ].filter(Boolean)
+    return parts.length > 0 ? parts.join("; ") : null
+  }
+  const queue = sortQueue(items)
 
   return (
     <>
@@ -90,18 +102,18 @@ export function CheckInPanel({ coachToken, practiceId, checkInUrl, qrDataUrl }: 
               <p className="text-sm text-muted-foreground">{t("empty")}</p>
             ) : (
               <ItemGroup className="max-h-96 overflow-y-auto">
-                {items.map((c) => (
+                {queue.map((c) => (
                   <Item key={c.id} size="sm" variant={c.routing === "emergency" && !c.resolvedAt ? "outline" : "muted"} className={cn(c.routing === "emergency" && !c.resolvedAt && "ring-2 ring-destructive")}>
                     <ItemContent>
                       <ItemTitle className="flex flex-wrap items-center gap-2">
                         <Badge variant={c.routing === "emergency" ? "destructive" : c.routing === "check_now" ? "secondary" : "outline"}>{t(c.routing as "emergency")}</Badge>
-                        <span>{c.alias ? `#${c.alias}` : t("anonymous")}</span>
+                        <span>{c.alias ?? t("anonymous")}</span>
                         <span className="font-mono text-xs text-muted-foreground tabular-nums">{formatTime(new Date(c.at), locale)}</span>
                       </ItemTitle>
                       <ItemDescription>
                         {[...c.symptoms.map(symptomLabel), c.text ? `"${c.text}"` : null].filter(Boolean).join(" · ")}
                       </ItemDescription>
-                      {c.aiFlags?.reasons && <p className="text-xs text-muted-foreground">{t("aiFlags", { reasons: String(c.aiFlags.reasons) })}</p>}
+                      {reasonText(c.aiFlags?.reasons) && <p className="text-xs text-muted-foreground">{t("aiFlags", { reasons: reasonText(c.aiFlags?.reasons)! })}</p>}
                     </ItemContent>
                     <ItemActions>
                       {c.resolvedAt ? (
