@@ -134,7 +134,7 @@ export function CheckInPanel({ coachToken, practiceId, checkInUrl, qrDataUrl }: 
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogMedia className="bg-destructive/10 text-destructive"><BellRing /></AlertDialogMedia>
-            <AlertDialogTitle>{t("alertTitle")}: {alert?.alias ? `#${alert.alias}` : t("anonymous")}</AlertDialogTitle>
+            <AlertDialogTitle>{t("alertTitle")}: {alert?.alias ?? t("anonymous")}</AlertDialogTitle>
             <AlertDialogDescription>
               {alert && [...alert.symptoms.map(symptomLabel), alert.text ? `"${alert.text}"` : null].filter(Boolean).join(" · ")}
             </AlertDialogDescription>
