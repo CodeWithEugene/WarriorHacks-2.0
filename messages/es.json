@@ -304,7 +304,8 @@
     "photoManual": "No pudimos leer bien el medidor. Ingrese el valor a mano.",
     "photoFar": "Está a más de 8° del pronóstico. Revise el medidor.",
     "photoNotConfigured": "La lectura por foto no está configurada. Ingrese el valor a mano.",
-    "photoPrivacy": "La foto se lee una vez y no se guarda."
+    "photoPrivacy": "La foto se lee una vez y no se guarda.",
+    "photoOfMeter": "Leer Desde Una Foto"
   },
   "emergency": {
     "title": "Protocolo De Golpe De Calor Por Esfuerzo",

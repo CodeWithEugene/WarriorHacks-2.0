@@ -18,7 +18,7 @@ export function LocaleToggle() {
     <Button
       variant="ghost"
       size="sm"
-      aria-label={t("toggleLanguage")}
+      title={t("toggleLanguage")}
       disabled={pending}
       onClick={() =>
         startTransition(async () => {
@@ -28,7 +28,8 @@ export function LocaleToggle() {
       }
     >
       <Languages data-icon="inline-start" />
-      {next === "es" ? "Español" : "English"}
+      {/* The visible word is the accessible name (WCAG 2.5.3), spoken in its own language. */}
+      <span lang={next}>{next === "es" ? "Español" : "English"}</span>
     </Button>
   )
 }
